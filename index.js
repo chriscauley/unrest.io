@@ -1,6 +1,8 @@
 import hash from 'object-hash'
 
-import uR from './Object'
+const uR = {}
+export default uR
+
 import Ready from './ready'
 import element from './element'
 import schema from './schema'
@@ -45,4 +47,3 @@ if (typeof window !== 'undefined') {
   window.uR = uR
 }
 
-export default uR
