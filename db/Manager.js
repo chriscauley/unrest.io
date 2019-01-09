@@ -6,6 +6,22 @@ export default class Manager {
     this.model = model
     this.base_url = `/api/${model.app_label}/${model.model_name}/`
     this.refresh()
+
+    this.create = data =>
+      ajax({
+        url: this.base_url,
+        method: 'POST',
+        data: data,
+      }).then(this.set)
+
+    this.save = obj => this.create(obj.serialize())
+
+    this.set = data => {
+      const obj = new this.model(data)
+      this.items.set(obj.id, obj)
+      this[obj.id] = obj
+      return obj
+    }
   }
 
   refresh() {
@@ -24,19 +40,4 @@ export default class Manager {
     return this.items.get(id)
   }
 
-  create = data =>
-    ajax({
-      url: this.base_url,
-      method: 'POST',
-      data: data,
-    }).then(this.set)
-
-  save = obj => this.create(obj.serialize())
-
-  set = data => {
-    const obj = new this.model(data)
-    this.items.set(obj.id, obj)
-    this[obj.id] = obj
-    return obj
-  }
 }

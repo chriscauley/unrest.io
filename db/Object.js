@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import db from "./index"
 
 const assert = (bool, exception) => {
   if (!bool) {
@@ -115,7 +116,6 @@ const notNil = _.negate(_.isNil)
 
 const _Object = class _Object {
   //static fields = { id: 0 } // defines the data structure to be serialized
-  static opts = {} // non-data initialization options
   //manager = // Storage class to be used for Objects
 
   constructor(opts) {
@@ -154,6 +154,7 @@ const _Object = class _Object {
       }
       manager = manager || cls.manager
     }
+    console.log(manager)
     const fields = (this.META.fields = new Map(
       Object.entries(_.defaults({}, ..._.reverse(fieldsets))),
     ))
@@ -211,8 +212,9 @@ const _Object = class _Object {
     return _.pickBy(json, notNil)
   }
 }
+_Object.opts = {} // non-data initialization options
 
-const uR = {
+export default {
   REQUIRED: {},
   Int,
   Field,
@@ -222,4 +224,3 @@ const uR = {
   Object: _Object,
 }
 
-export default uR
