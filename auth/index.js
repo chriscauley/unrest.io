@@ -32,7 +32,7 @@ auth.ready(() => {
 
 export default auth
 
-import _ur_auth from './ur-auth.tag'
+import './ur-auth.tag'
 import loginRequired from './loginRequired'
 import setUser from './setUser'
 import reset from './reset'

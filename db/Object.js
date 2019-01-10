@@ -154,7 +154,6 @@ const _Object = class _Object {
       }
       manager = manager || cls.manager
     }
-    console.log(manager)
     const fields = (this.META.fields = new Map(
       Object.entries(_.defaults({}, ..._.reverse(fieldsets))),
     ))

@@ -20,3 +20,11 @@ import auth from './index'
   this.mixin(ThemeMixin)
 </script>
 </ur-auth-start>
+
+<ur-auth-login>
+  <div class={theme.outer}>
+    <div class={theme.content}>
+      Not Implemented :(
+    </div>
+  </div>
+</ur-auth-login>
