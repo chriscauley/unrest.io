@@ -27,7 +27,12 @@ export default (tagName, attrs, riot_opts) => {
   Object.assign(element, attrs)
 
   if (riot_opts) {
-    riot.mount(element, riot_opts)
+    try {
+      riot.mount(element, riot_opts)
+    } catch (e) {
+      console.error("unable to mount",element,riot_opts)
+      throw e
+    }
   }
   return element
 }
