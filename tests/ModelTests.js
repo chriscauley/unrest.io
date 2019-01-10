@@ -2,10 +2,11 @@ import _ from 'lodash'
 import { expect } from 'chai'
 
 import uR from '../'
+const { Model } = uR.db
 
 export default () => {
   it('serializes itself to the correct value', () => {
-    class OneTwoThree extends uR.Object {
+    class OneTwoThree extends Model {
       static fields = {
         one: 1,
         two: 2,
@@ -26,8 +27,8 @@ export default () => {
   })
 
   it('tracks ids independently of classes', () => {
-    class A extends uR.Object {}
-    class B extends uR.Object {}
+    class A extends Model {}
+    class B extends Model {}
 
     const as = _.range(3).map(_i => new A().id)
     const bs = _.range(3).map(_i => new B().id)
@@ -42,22 +43,25 @@ export default () => {
       i: 1,
       s: 'some string',
     }
-    class Explicit extends uR.Object {
+    console.log(uR.db)
+    class Explicit extends Model {
       static fields = {
-        i: uR.Int(1, { required: true }),
-        s: uR.String('some string'),
+        i: uR.db.Int(1, { required: true }),
+        s: uR.db.String('some string'),
       }
     }
-    class Implicit extends uR.Object {
+    class Implicit extends Model {
       static fields = { ...out }
     }
+    console.log(0)
     const exp = new Explicit()
+    console.log(1)
     const imp = new Implicit()
     expect(exp.serialize()).to.deep.equal(imp.serialize())
   })
 
   it('Validators work', () => {
-    class A extends uR.Object {
+    class A extends Model {
       static fields = {
         i: 1,
         s: 'some string',
