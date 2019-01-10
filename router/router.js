@@ -6,7 +6,7 @@ const router = {
     throw 'NotImplemented'
   }, // #! TODO
   MODAL_PREFIX: /^#!/,
-  ready: new Ready(),
+  ready: Ready(),
   add: new_routes => Object.assign(router._routes, new_routes),
 }
 

@@ -1,6 +1,6 @@
 /* A task queue that can be started and stopped.
    Usage:
-   ready = new Ready();
+   ready = Ready();
    const f = () => console.log(1);
    ready(f);
    ready(f,f,f);

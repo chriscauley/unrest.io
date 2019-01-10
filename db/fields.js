@@ -15,7 +15,7 @@ const ForeignKey = (model, opts = {}) => {
     }
     field.deserialize = pk => model.objects.get(pk)
   })
-  Model.assign(field, {
+  Object.assign(field, {
     deserialize: (pk, json) => {
       if (json[field.name + '_id']) {
         return json[field.name + '_id']

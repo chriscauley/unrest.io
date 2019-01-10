@@ -4,9 +4,9 @@ import config from './config'
 import css from '../css'
 import create from '../element/create'
 
+const ATTRS =  ['name', 'id', 'placeholder', 'required', 'minlength', 'value']
 class Input {
   // html attributes from opts
-  _attrs = ['name', 'id', 'placeholder', 'required', 'minlength', 'value']
 
   constructor(opts) {
     _.defaults(this, opts, {
@@ -37,7 +37,7 @@ class Input {
   }
 
   _createInput() {
-    const attrs = _.pick(this, this._attrs)
+    const attrs = _.pick(this, ATTRS)
 
     attrs.type = this.input_type
     attrs.parent = this.tag.root
@@ -93,11 +93,11 @@ class Input {
     })
   }
 
-  focus = () => {}
-  keydown = () => {}
-  keyup = () => {}
-  change = () => {}
-  blur = () => {}
+  focus() {}
+  keydown() {}
+  keyup() {}
+  change() {}
+  blur() {}
 }
 
 config.tag2class['ur-input'] = Input
