@@ -1,0 +1,4 @@
+#!/bin/sh
+rm -rf dist/*
+cp -r tests/dummy dist
+parcel tests/index.html -p 8769
