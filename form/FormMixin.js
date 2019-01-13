@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import riot from 'riot'
 
 //import config from './config'
 import schema from '../schema'
@@ -17,7 +18,15 @@ const getCls = opts => {
 }
 
 export default {
+  prepOpts: function() {
+    const { matches } = this.opts
+    if (matches && uR.db[matches[1]]) {
+      this.opts.model = uR.db[matches[1]]
+      this.opts.object = this.opts.model.objects.get(matches[2])
+    }
+  },
   init: function() {
+    this.prepOpts()
     this.inputs = []
     window.uR._latest_form = this
     _.defaults(this.opts, {
@@ -27,15 +36,23 @@ export default {
     })
 
     _.assign(this, {
+      title: this.opts.title,
       addInputs: (opts = this.opts) => {
         const { object, model, _schema } = opts
         let fields, fieldnames, submit
         if (object) {
+          opts.initial = object.serialize()
           fields = new Map([...object.META.fields])
           fieldnames = object.constructor.editable_fieldnames || []
           submit = () => {
-            object.deserialize(this.getData())
+            Object.assign(object,this.getData())
+            if (model) {
+              model.objects.create({
+                ...object.serialize(),
+              })
+            }
             this.unmount()
+            riot.update()
           }
         } else if (model) {
           model.__makeMeta()
@@ -44,6 +61,7 @@ export default {
           submit = () => {
             new opts.model(this.getData())
             this.unmount()
+            riot.update()
           }
         } else if (_schema) {
           throw 'NotImplemented: Schema to form coming soon'

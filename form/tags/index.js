@@ -1,2 +1,2 @@
-import './input'
-import './form'
+import './input.tag'
+import './form.tag'
