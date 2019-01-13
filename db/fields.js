@@ -32,6 +32,14 @@ const ForeignKey = (model, opts = {}) => {
   return field
 }
 
+const DateTime = (opts = {}) => {
+  const initial = (opts.auto_now_add || opts.auto_now)?new Date().valueOf():undefined
+  const field = Field(initial,opts)
+  return Object.assign(field, {
+    type: 'datetime',
+  })
+}
+
 const Field = (initial, opts = {}) => {
   const field = {
     initial,
@@ -126,4 +134,5 @@ export {
   Int,
   ForeignKey,
   String,
+  DateTime,
 }

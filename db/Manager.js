@@ -27,6 +27,9 @@ export default class Manager {
   all() {
     return [...this.items.values()]
   }
+  filter() {
+    return this.all().filter(...arguments)
+  }
   refresh() {
     // #! TODO should be db.ready.block or db.ready.ajax
     db.ready.stop()
