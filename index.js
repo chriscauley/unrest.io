@@ -26,8 +26,6 @@ Object.assign(uR, {
   auth,
   storage,
   db,
-  _icons: {},
-  icon: i => uR._icons[i] || 'fa fa-' + i,
 })
 
 uR.ready.then(() => {
