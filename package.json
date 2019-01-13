@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "main": "dist/index.js",
+  "source": "index.js",
   "directories": {
     "test": "tests"
   },
@@ -18,7 +19,8 @@
   "license": "MIT",
   "dependencies": {
     "cookie": "^0.3.1",
-    "object-hash": "^1.3.1"
+    "object-hash": "^1.3.1",
+    "riot": "^3.13.2"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
@@ -33,8 +35,11 @@
     "eslint-plugin-riot": "^0.1.8",
     "less": "^3.9.0",
     "parcel": "^1.11.0",
-    "parcel-plugin-riot": "https://github.com/chriscauley/parcel-plugin-riot.git",
     "prettier": "^1.15.3"
+  },
+  "peerDependencies": {
+    "parcel-plugin-riot": "https://github.com/chriscauley/parcel-plugin-riot.git",
+    "riot": "^3.13.2"
   },
   "babel": {
     "plugins": [

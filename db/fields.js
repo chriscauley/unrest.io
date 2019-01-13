@@ -13,7 +13,12 @@ const ForeignKey = (model, opts = {}) => {
     if (typeof model === 'string') {
       model = _.get(db, model)
     }
-    field.deserialize = pk => model.objects.get(pk)
+    /*field.deserialize = (pk,json) => {
+      if (json[field.name + '_id']) {
+        pk = json[field.name + '_id']
+      }
+      return model.objects.get(pk)
+    }*/
   })
   Object.assign(field, {
     deserialize: (pk, json) => {

@@ -24,6 +24,9 @@ export default class Manager {
     }
   }
 
+  all() {
+    return [...this.items.values()]
+  }
   refresh() {
     // #! TODO should be db.ready.block or db.ready.ajax
     db.ready.stop()
@@ -37,7 +40,6 @@ export default class Manager {
   }
 
   get(id) {
-    return this.items.get(id)
+    return this.items.get(parseInt(id))
   }
-
 }
