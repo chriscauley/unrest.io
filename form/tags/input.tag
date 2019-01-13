@@ -1,5 +1,3 @@
-import _ from "lodash"
-
 <ur-input>
 <script>
 this.on("before-mount",() => {
