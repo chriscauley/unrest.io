@@ -4,13 +4,14 @@ import config from './config'
 import css from '../css'
 import create from '../element/create'
 
+// html attributes from opts
 const ATTRS =  ['name', 'id', 'placeholder', 'required', 'minlength', 'value']
 class Input {
-  // html attributes from opts
+  default_tag = 'ur-input'
 
   constructor(opts) {
     _.defaults(this, opts, {
-      tagName: 'ur-input',
+      tagName: this.default_tag,
       input_tagname: 'input',
       input_type: opts.type,
       validators: [],
@@ -55,9 +56,6 @@ class Input {
 
   _checkValidity(value = this.value) {
     this.valid = false
-    if (!this._input.checkValidity()) {
-      return this.valid
-    }
 
     try {
       // this is valid if no validator throws an exception
@@ -72,12 +70,16 @@ class Input {
     return this.valid
   }
 
+  _get_value() {
+    return this.coerce(this._input.value)
+  }
+
   bindEvents(input) {
     const EVENTS = ['change', 'focus', 'keyup', 'keydown']
 
     EVENTS.forEach(name => {
       input.addEventListener(name, _event => {
-        const new_value = this.coerce(input.value)
+        const new_value = this._get_value()
         if (this.value !== new_value) {
           this.value = new_value
           this._checkValidity()

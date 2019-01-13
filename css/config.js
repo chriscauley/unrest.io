@@ -35,6 +35,9 @@ const base = {
 }
 
 const spectre = {
+  default: {
+    header_title: 'h4',
+  },
   modal: {
     mask: 'modal-overlay',
     root: 'modal active',
