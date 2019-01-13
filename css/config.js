@@ -32,6 +32,8 @@ const base = {
     group: 'btn-group',
     group_block: 'btn-group', // DNE for bootstrap
   },
+  bg: {}, // #! TODO bootstrap
+  mixin_attrs: ['btn','bg'],
 }
 
 const spectre = {
