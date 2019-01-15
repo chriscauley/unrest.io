@@ -1,0 +1,5 @@
+import './app.tag'
+import './edit.tag'
+import './home.tag'
+import './list.tag'
+import './table.tag'

@@ -1,9 +1,13 @@
 import hash from 'object-hash'
+import Ready from './ready'
 
-const uR = {}
+const uR = {
+  ready: Ready(),
+  Ready,
+}
+
 export default uR
 
-import Ready from './ready'
 import element from './element'
 import schema from './schema'
 import form from './form'
@@ -13,10 +17,9 @@ import ajax from './ajax'
 import auth from './auth'
 import storage from './storage'
 import db from './db'
+import admin from './admin'
 
 Object.assign(uR, {
-  ready: Ready(),
-  Ready,
   element,
   schema,
   form,
@@ -26,6 +29,7 @@ Object.assign(uR, {
   auth,
   storage,
   db,
+  admin,
 })
 
 uR.ready.then(() => {
