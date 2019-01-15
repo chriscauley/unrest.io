@@ -65,6 +65,9 @@ class Model {
     if (manager) {
       this.objects = new manager(this)
     }
+    this.prototype.toString = function() {
+      return this.__str__()
+    }
 
     this.__makeMeta = () => {} // only execute once!
   }
@@ -98,7 +101,9 @@ class Model {
     })
     return _.pickBy(json, notNil)
   }
+  __str__() {
+    return `[${this.constructor.model_name} #${this.id}]`
+  }
 }
 Model.opts = {} // non-data initialization options
-
 export default Model
