@@ -5,7 +5,7 @@ import css from '../css'
 import create from '../element/create'
 
 // html attributes from opts
-const ATTRS =  ['name', 'id', 'placeholder', 'required', 'minlength', 'value']
+const ATTRS = ['name', 'id', 'placeholder', 'required', 'minlength', 'value']
 class Input {
   default_tag = 'ur-input'
 
@@ -24,7 +24,7 @@ class Input {
     })
     this.css = {
       label: css.form.label,
-      field: css.form.field + " ur-" + opts.type,
+      field: css.form.field + ' ur-' + opts.type,
       input: css.form.input,
     }
     this._updateCss()

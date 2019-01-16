@@ -3,7 +3,9 @@ import ThemeMixin from '../../css/ThemeMixin'
 
 <ur-form>
   <div class={ theme.outer }>
-    <div class={ theme.header } if={ title }>{ title }</div>
+    <div class={ theme.header } if={ title }>
+      <div class={ theme.header_title}>{ title }</div>
+    </div>
     <div class={ theme.content }>
       <div class="rendered_content"></div>
       <form onsubmit={ submit } class={ className }>

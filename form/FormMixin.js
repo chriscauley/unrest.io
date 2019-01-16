@@ -3,6 +3,7 @@ import riot from 'riot'
 
 //import config from './config'
 import schema from '../schema'
+import db from '../db'
 import config from './config'
 import Input from './Input'
 import Select from './Select'
@@ -24,8 +25,8 @@ const getCls = opts => {
 export default {
   prepOpts: function() {
     const { matches } = this.opts
-    if (matches && uR.db[matches[1]]) {
-      this.opts.model = uR.db[matches[1]]
+    if (matches && db[matches[1]]) {
+      this.opts.model = db[matches[1]]
       this.opts.object = this.opts.model.objects.get(matches[2])
     }
   },
@@ -49,12 +50,10 @@ export default {
           fields = new Map([...object.META.fields])
           fieldnames = object.constructor.editable_fieldnames || []
           submit = () => {
-            Object.assign(object,this.getData())
-            if (model) {
-              model.objects.create({
-                ...object.serialize(),
-              })
-            }
+            Object.assign(object, this.getData())
+            object.constructor.objects.create({
+              ...object.serialize(),
+            })
             this.unmount()
             riot.update()
           }
@@ -63,14 +62,14 @@ export default {
           fields = new Map([...model.META.fields])
           fieldnames = model.editable_fieldnames || []
           submit = () => {
-            new opts.model(this.getData())
+            model.objects.create(this.getData())
             this.unmount()
             riot.update()
           }
         } else if (_schema) {
           throw 'NotImplemented: Schema to form coming soon'
         } else {
-          throw 'ValueError: <ur-form> requires a schema, constructor, or object'
+          throw 'ValueError: <ur-form> requires a schema, model, or object'
         }
 
         // called by tag when form is submitted
