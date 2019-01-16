@@ -6,9 +6,12 @@ import unslugify from '../schema/unslugify'
 
 const register = model => {
   const { app_label, model_name } = model
+  if (!model_name || !app_label) {
+    throw "Model needs app_label and model_name"
+  }
   if (!db[app_label]) {
     db[app_label] = {
-      verbose_name: unslugify(app_label),
+      verbose_name: unslugify(app_label || "main"),
       name: app_label,
       _models: [],
     }
