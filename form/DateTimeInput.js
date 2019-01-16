@@ -11,28 +11,28 @@ class DateTimeInput extends Input {
     let date_value, time_value
     if (this.value) {
       const dt = new Date(this.value)
-      date_value = format(dt,"YYYY-MM-DD")
-      time_value = format(dt,"HH:mm")
+      date_value = format(dt, 'YYYY-MM-DD')
+      time_value = format(dt, 'HH:mm')
     }
     const attrs = {
       className: this.css.input,
       parent: this.tag.root,
     }
-    setTimeout(()=> this._date_input.value = date_value,2000)
-    this._date_input = create("input",{
-      type: "date",
+    setTimeout(() => (this._date_input.value = date_value), 2000)
+    this._date_input = create('input', {
+      type: 'date',
       value: date_value,
       ...attrs,
     })
-    this._time_input = create("input",{
-      type: "time",
+    this._time_input = create('input', {
+      type: 'time',
       value: time_value,
       ...attrs,
     })
   }
 
   _get_value() {
-    const str = this._date_input.value + " " + this._time_input.value
+    const str = this._date_input.value + ' ' + this._time_input.value
     return new Date(str).valueOf()
   }
 
