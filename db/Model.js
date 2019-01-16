@@ -74,10 +74,7 @@ class Model {
 
   deserialize(json = {}) {
     this.META.fields.forEach((field, name) => {
-      const value = _.find(
-        [json[name], field.initial, this[name]],
-        notNil,
-      )
+      const value = json[name]
       if (field.deserialize) {
         this[name] = field.deserialize(value, json)
       } else if (typeof field === 'function') {
