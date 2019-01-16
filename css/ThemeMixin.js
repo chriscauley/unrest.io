@@ -6,7 +6,11 @@ import Mixin from './Mixin'
 export default {
   init: function(opts) {
     this.mixin(Mixin)
-    this.theme = this.css[opts.ur_modal ? 'modal' : 'default']
+    if (opts.ur_modal) {
+      this.theme = this.css.modal
+    } else {
+      this.theme = this.css[opts.theme || "default"]
+    }
 
     if (opts.ur_modal) {
       if (opts.cancel) {

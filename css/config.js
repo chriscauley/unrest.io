@@ -4,9 +4,10 @@ const base = {
   // bootstrap is default
   default: {
     outer: 'card',
-    header: 'card-header',
     content: 'card-body',
     footer: 'card-footer',
+    header: 'card-header',
+    header_title: 'h4',
   },
   modal: {
     mask: 'modal-backgrop fade show',
@@ -16,6 +17,9 @@ const base = {
     content: 'modal-body',
     footer: 'modal-footer',
     header_title: 'modal-title',
+  },
+  none: {
+    header_title: 'h4',
   },
   error: 'alert alert-danger',
   table: 'table table-striped table-hover',
@@ -29,6 +33,7 @@ const base = {
     success: 'btn btn-success',
     cancel: 'btn btn-error',
     warning: 'btn bg-warning',
+    link: 'btn btn-link',
     group: 'btn-group',
     group_block: 'btn-group', // DNE for bootstrap
   },
@@ -37,9 +42,6 @@ const base = {
 }
 
 const spectre = {
-  default: {
-    header_title: 'h4',
-  },
   modal: {
     mask: 'modal-overlay',
     root: 'modal active',
