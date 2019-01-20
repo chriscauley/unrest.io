@@ -1,5 +1,6 @@
 import Ready from '../ready'
-import Manager from "./Manager"
+import APIManager from "./APIManager"
+import BaseManager from "./BaseManager"
 import Model from "./Model"
 import * as fields from "./fields"
 import unslugify from '../schema/unslugify'
@@ -26,7 +27,8 @@ const register = model => {
 const db = {
   ready: Ready(),
   register,
-  Manager,
+  APIManager,
+  BaseManager,
   Model,
   fields,
   apps: [],
