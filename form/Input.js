@@ -5,8 +5,8 @@ import css from '../css'
 import create from '../element/create'
 
 // html attributes from opts
-const ATTRS = ['name', 'id', 'placeholder', 'required', 'minlength', 'value']
 class Input {
+  ATTRS = ['name', 'id', 'placeholder', 'required', 'minlength', 'value']
   default_tag = 'ur-input'
 
   constructor(opts) {
@@ -38,7 +38,7 @@ class Input {
   }
 
   _createInput() {
-    const attrs = _.pick(this, ATTRS)
+    const attrs = _.pick(this, this.ATTRS)
 
     attrs.type = this.input_type
     attrs.parent = this.tag.root

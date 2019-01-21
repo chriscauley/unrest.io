@@ -17,7 +17,7 @@ export default class Select extends Input {
         value: c.value,
       })
     })
-    this._attrs.forEach(attr => {
+    this.ATTRS.forEach(attr => {
       this._input[attr] = this[attr]
     })
   }
