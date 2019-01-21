@@ -37,8 +37,13 @@ const DateTime = (opts = {}) => {
   const field = Field(initial,opts)
   return Object.assign(field, {
     type: 'datetime',
-    serialize: value => value.valueOf?value.valueOf():value,
+    serialize: value => (value && value.valueOf)?value.valueOf():value,
   })
+}
+
+const Time = (initial,opts = {}) => {
+  const field = Field(initial,opts)
+  return field
 }
 
 const Field = (initial, opts = {}) => {
@@ -57,7 +62,7 @@ const Field = (initial, opts = {}) => {
     deserialize: v => v,
     type: opts.type,
     required: opts.required || opts.required === undefined,
-    opts,
+    ...opts,
   }
   opts.required && // defaults to true!
     field.validators.push(v =>
@@ -136,4 +141,5 @@ export {
   ForeignKey,
   String,
   DateTime,
+  Time,
 }
