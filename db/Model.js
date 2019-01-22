@@ -76,7 +76,7 @@ class Model {
     this.META.fields.forEach((field, name) => {
       const value = json[name]
       if (field.deserialize) {
-        this[name] = field.deserialize(value, json)
+        this[name] = field.deserialize(value, json, this)
       } else if (typeof field === 'function') {
         // this is not a 100% accurate test for when to use new
         // https://stackoverflow.com/a/40922715

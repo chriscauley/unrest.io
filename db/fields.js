@@ -7,27 +7,52 @@ const assert = (bool, exception) => {
   }
 }
 
-const ForeignKey = (model, opts = {}) => {
+const ForeignKey = (fk_model, opts = {}) => {
   const field = Field(undefined, opts)
   db.ready(() => {
-    if (typeof model === 'string') {
-      model = _.get(db, model)
+    if (typeof fk_model === 'string') {
+      fk_model = field.fk_model = _.get(db, fk_model)
     }
-    /*field.deserialize = (pk,json) => {
-      if (json[field.name + '_id']) {
-        pk = json[field.name + '_id']
+    field.deserialize = (pk, json, obj) => {
+      if (pk instanceof fk_model) {
+        obj[field.name+"_id"] = pk.id
+        obj[field.name] = pk
+        return pk
       }
-      return model.objects.get(pk)
-    }*/
+      let fk_obj
+      if (!pk && json[field.name + '_id']) {
+        pk = json[field.name + '_id']
+      } else if (pk && pk.id) {
+        // it's an actual instance
+        fk_obj = pk
+        pk = pk.id
+      }
+      if (pk && !fk_obj) {
+        fk_obj = fk_model.objects.get(pk)
+      }
+      obj[field.name] = fk_obj
+      obj[field.name+"_id"] = pk
+      return fk_obj
+    }
   })
   Object.assign(field, {
-    deserialize: (pk, json) => {
-      if (json[field.name + '_id']) {
-        return json[field.name + '_id']
-      }
+    type: "foreignkey",
+    fk_model,
+    deserialize: (pk, json, obj) => {
+      db.ready(() => {
+        field.deserialize(pk, json, obj)
+      })
       return pk
     },
-    serialize: (obj = field) => obj,
+    serialize: obj => {
+      if (typeof obj === "string") {
+        return parseInt(obj)
+      }
+      if (typeof obj === "number") {
+        return obj
+      }
+      return obj && obj.id
+    }
   })
   return field
 }
@@ -43,6 +68,7 @@ const DateTime = (opts = {}) => {
 
 const Time = (initial,opts = {}) => {
   const field = Field(initial,opts)
+  field.type = 'time'
   return field
 }
 
