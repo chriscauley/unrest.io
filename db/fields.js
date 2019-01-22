@@ -13,11 +13,14 @@ const ForeignKey = (fk_model, opts = {}) => {
     if (typeof fk_model === 'string') {
       fk_model = field.fk_model = _.get(db, fk_model)
     }
+    const setFK = (obj,fk_obj) => {
+      obj[field.name+"_id"] = fk_obj.id
+      obj[field.name] = fk_obj
+      return fk_obj
+    }
     field.deserialize = (pk, json, obj) => {
       if (pk instanceof fk_model) {
-        obj[field.name+"_id"] = pk.id
-        obj[field.name] = pk
-        return pk
+        return setFK(obj,pk)
       }
       let fk_obj
       if (!pk && json[field.name + '_id']) {
@@ -30,9 +33,7 @@ const ForeignKey = (fk_model, opts = {}) => {
       if (pk && !fk_obj) {
         fk_obj = fk_model.objects.get(pk)
       }
-      obj[field.name] = fk_obj
-      obj[field.name+"_id"] = pk
-      return fk_obj
+      return fk_obj && setFK(obj,fk_obj)
     }
   })
   Object.assign(field, {
