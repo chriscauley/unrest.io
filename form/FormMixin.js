@@ -88,6 +88,12 @@ export default {
           label: schema.unslugify(field.name),
           id: `${this.prefix || ''}__${field.name}`,
         }
+        if (field.type === "foreignkey") {
+          // #! TODO maybe this could be in field.prepInput or something?
+          // currently it's too specific to foreignkey
+          field.choices = field.fk_model.objects.all()
+            .map(obj => [obj.id,obj.toString()])
+        }
         _.assign(opts, field)
         if (this.opts.initial) {
           opts.initial = this.opts.initial[opts.name]
