@@ -8,7 +8,7 @@ import create from './create'
 // should this be moved into the router?
 // this would also let the create('div',{...}) go in uR.router.ready()
 //#! TODO this breaks if not in browser (document DNE)
-// move to unrest.js/index.js
+// move to unrest.io/index.js
 if (typeof document !== "undefined") {
   ;[config.mount_alerts_to, config.mount_to].forEach(selector => {
     if (!document.querySelector(selector)) {

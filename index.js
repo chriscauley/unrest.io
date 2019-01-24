@@ -30,6 +30,8 @@ Object.assign(uR, {
   storage,
   db,
   admin,
+  Date: window.Date,
+  TrueDate: window.Date,
 })
 
 uR.ready.then(() => {

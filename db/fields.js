@@ -140,7 +140,7 @@ const Boolean = (initial, opts = {}) => {
 const List = type => {
   let deserialize = list => list
   if (typeof type === 'function') {
-    deserialize = list => list.map(item => new type(item))
+    deserialize = list => list && list.map(item => new type(item))
   }
   return {
     serialize: list =>
