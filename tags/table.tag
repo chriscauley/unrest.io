@@ -6,7 +6,6 @@ import _ from 'lodash'
     {cell.text}
   </div>
 <script>
-console.log(this)
 </script>
 </ur-row>
 
@@ -14,7 +13,7 @@ console.log(this)
   <ur-row each={row,ir in rows} key={ir}></ur-row>
 
 <script>
-this.on("before-mount", () => {
+this.on("update", () => {
   this.rows = opts.rows.map((row,ir) => {
     return row.map((cell,ic) => {
       /* #!TODO
@@ -24,12 +23,10 @@ this.on("before-mount", () => {
       if (typeof cell !== 'object') {
         cell = { text: cell }
       }
-      console.log(cell)
       return cell
     })
   })
-  console.log(this.rows)
-  this.update()
 })
+this.on("mount", () => this.update())
 </script>
 </ur-table>
