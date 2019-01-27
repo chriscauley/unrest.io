@@ -18,6 +18,7 @@ import auth from './auth'
 import storage from './storage'
 import db from './db'
 import admin from './admin'
+import './tags'
 
 Object.assign(uR, {
   element,
