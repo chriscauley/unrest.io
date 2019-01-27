@@ -43,7 +43,7 @@ export default {
     _.assign(this, {
       title: this.opts.title,
       addInputs: (opts = this.opts) => {
-        const { object, model, _schema } = opts
+        const { object, model } = opts
         let fields, fieldnames, submit
         if (object) {
           opts.initial = object.serialize()
@@ -66,8 +66,9 @@ export default {
             this.unmount()
             riot.update()
           }
-        } else if (_schema) {
-          throw 'NotImplemented: Schema to form coming soon'
+        } else if (opts.schema) {
+          fields = new Map(Object.entries(opts.schema))
+          fieldnames = [...fields.keys()]
         } else {
           throw 'ValueError: <ur-form> requires a schema, model, or object'
         }
