@@ -13,7 +13,7 @@ import uR from '../../index'
 <script>
 this.mixin(uR.css.ThemeMixin)
 this.on("mount",function() {
-  this.thead = ["App Label"]
+  this.thead = ["App Label","Count"]
   this.tbody = []
   uR.db.apps.map(app => {
     const url_root = `#!/admin/${app.name}/`

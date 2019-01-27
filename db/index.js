@@ -49,6 +49,7 @@ const db = {
   Model,
   fields,
   apps: [],
+  REQUIRED: {},
   ...fields,
 }
 

@@ -144,7 +144,7 @@ const List = type => {
   }
   return {
     serialize: list =>
-      list.map(item =>
+      list && list.map(item =>
         _.isFunction(item.serialize) ? item.serialize() : item,
       ),
     deserialize,
