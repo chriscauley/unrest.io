@@ -91,7 +91,7 @@ const Field = (initial, opts = {}) => {
     required: opts.required || opts.required === undefined,
     ...opts,
   }
-  opts.required && // defaults to true!
+  field.required && // defaults to true!
     field.validators.push(v =>
       assert(!_.isNil(v), `ValueError: ${field} is required`),
     )
@@ -140,11 +140,11 @@ const Boolean = (initial, opts = {}) => {
 const List = type => {
   let deserialize = list => list
   if (typeof type === 'function') {
-    deserialize = list => list && list.map(item => new type(item))
+    deserialize = list => (list || []).map(item => new type(item))
   }
   return {
     serialize: list =>
-      list && list.map(item =>
+      (list || []).map(item =>
         _.isFunction(item.serialize) ? item.serialize() : item,
       ),
     deserialize,
