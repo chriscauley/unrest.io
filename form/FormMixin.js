@@ -48,7 +48,7 @@ export default {
         if (object) {
           opts.initial = object.serialize()
           fields = new Map([...object.META.fields])
-          fieldnames = object.constructor.editable_fieldnames || []
+          fieldnames = object.getFieldnames()
           submit = () => {
             Object.assign(object, this.getData())
             object.constructor.objects.create({

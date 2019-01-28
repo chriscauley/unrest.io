@@ -101,6 +101,9 @@ class Model {
     })
     return _.pickBy(json, notNil)
   }
+  getFieldnames() {
+    return this.constructor.editable_fieldnames || []
+  }
   __str__() {
     return `[${this.constructor.model_name} #${this.id}]`
   }
