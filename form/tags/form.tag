@@ -53,8 +53,9 @@ submit(e) {
   this.opts.submit(this)
 }
 
-cancel() {
-  throw "Not Implemented"
+cancel(e) {
+  e && e.preventDefault && e.preventDefault()
+  this.opts.cancel(this,e)
 }
 </script>
 </ur-form>
