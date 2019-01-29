@@ -67,7 +67,7 @@ const DateTime = (opts = {}) => {
   })
 }
 
-const Time = (initial,opts = {}) => {
+const Time = (initial, opts = {}) => {
   const field = Field(initial,opts)
   field.type = 'time'
   return field
@@ -92,8 +92,8 @@ const Field = (initial, opts = {}) => {
     ...opts,
   }
   field.required && // defaults to true!
-    field.validators.push(v =>
-      assert(!_.isNil(v), `ValueError: ${field} is required`),
+    field.validators.push(
+      v => assert(!_.isNil(v), `ValueError: ${field} is required`),
     )
   return field
 }
@@ -137,18 +137,20 @@ const Boolean = (initial, opts = {}) => {
   return field
 }
 
-const List = type => {
+const List = (type, opts = {}) => {
   let deserialize = list => list
   if (typeof type === 'function') {
     deserialize = list => (list || []).map(item => new type(item))
   }
-  return {
+  return Field([],{
+    type: 'list',
     serialize: list =>
-      (list || []).map(item =>
-        _.isFunction(item.serialize) ? item.serialize() : item,
+      (list || []).map(
+        item => _.isFunction(item.serialize) ? item.serialize() : item,
       ),
     deserialize,
-  }
+    ...opts,
+  })
 }
 
 const TYPES = {

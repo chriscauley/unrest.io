@@ -2,7 +2,7 @@ import ajax from '../ajax'
 import db from './index'
 import BaseManager from './BaseManager'
 
-export default class Manager extends BaseManager {
+export default class APIManager extends BaseManager {
   create = data => {
     // #! TODO should be db.ready.block or db.ready.ajax
     db.ready.stop()
