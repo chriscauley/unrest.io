@@ -16,11 +16,13 @@ const admin = {
 
   start: () => {
     const { routeElement } = uR.router
+    const route = name => routeElement('ur-admin-'+name)
+
     uR.router.add({
-      '#!/admin/$': routeElement('ur-admin-home'),
-      '#!/admin/([^/]+)/$': routeElement('ur-admin-app'),
-      '#!/admin/([^/]+)/([^/]+)/$': routeElement('ur-admin-list'),
-      '#!/admin/([^/]+)/([^/]+)/(\\d+|new)/$': routeElement('ur-admin-edit'),
+      '#!/admin/$': route('home'),
+      '#!/admin/([^/]+)/$': route('app'),
+      '#!/admin/([^/]+)/([^/]+)/$': route('list'),
+      '#!/admin/([^/]+)/([^/]+)/(\\d+|new)/$': route('edit'),
     })
 
     uR.element.create('a', {

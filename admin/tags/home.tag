@@ -2,6 +2,7 @@ import uR from '../../index'
 
 <ur-admin-home>
   <div class={ theme.outer }>
+    <ur-breadcrumbs></ur-breadcrumbs>
     <div class={ theme.header }>
       <div class={ theme.header_title }>Admin Home</div>
     </div>
@@ -17,7 +18,7 @@ this.on("mount",function() {
   this.tbody = []
   uR.db.apps.map(app => {
     const url_root = `#!/admin/${app.name}/`
-    this.tbody.push([`<a href="${url_root}">${app.verbose_name}</a>`])
+    this.tbody.push([`<a href="${url_root}">${app.verbose_name}</a>`,""])
     app._models.map(model => {
       this.tbody.push([
         `<a href="${url_root}${model.model_name}/">${model.verbose_name}</a>`,
@@ -25,7 +26,6 @@ this.on("mount",function() {
       ])
     })
   });
-  this.tbody.push([""]);
 });
 </script>
 </ur-admin-home>

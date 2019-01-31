@@ -2,6 +2,7 @@ import uR from '../../index'
 
 <ur-admin-app>
   <div class={ theme.outer }>
+    <ur-breadcrumbs></ur-breadcrumbs>
     <div class={ theme.header }>
       <div class={ theme.header_title }>{ app.verbose_name } Admin</div>
     </div>

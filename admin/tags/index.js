@@ -1,4 +1,5 @@
 import './app.tag'
+import './breadcrumbs.tag'
 import './edit.tag'
 import './home.tag'
 import './list.tag'

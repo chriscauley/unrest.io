@@ -2,6 +2,7 @@ import uR from '../../index'
 
 <ur-admin-list>
   <div class={ theme.outer }>
+    <ur-breadcrumbs></ur-breadcrumbs>
     <div class={ theme.header }>
       <div class={ theme.header_title }>
         { model.verbose_name } Admin
