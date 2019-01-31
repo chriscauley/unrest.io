@@ -6,6 +6,11 @@ const uR = {
   Ready,
 }
 
+if (typeof window !== 'undefined') {
+  window.onload = uR.ready.start
+  window.uR = uR
+}
+
 export default uR
 
 import element from './element'
@@ -46,9 +51,3 @@ uR.ready.then(() => {
     uR.router.ready.start()
   })
 })
-
-if (typeof window !== 'undefined') {
-  window.onload = uR.ready.start
-  window.uR = uR
-}
-

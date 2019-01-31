@@ -14,7 +14,10 @@ const admin = {
     return uR.route(uR.admin.reverse(...arguments))
   },
 
-  start: () => {
+  start: () => uR.auth.ready(() => {
+    if (!uR.auth.user.is_superuser) {
+      return
+    }
     const { routeElement } = uR.router
     const route = name => routeElement('ur-admin-'+name)
 
@@ -31,7 +34,7 @@ const admin = {
       parent: document.body,
       id: 'admin-link',
     })
-  },
+  }),
 }
 
 export default admin
