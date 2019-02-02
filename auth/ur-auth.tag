@@ -1,5 +1,6 @@
 import ThemeMixin from '../css/ThemeMixin'
 import auth from './index'
+import ajax from '../ajax'
 
 <ur-auth-start>
   <div class={theme.outer}>
@@ -24,7 +25,20 @@ import auth from './index'
 <ur-auth-login>
   <div class={theme.outer}>
     <div class={theme.content}>
-      Not Implemented :(
+      <ur-form schema={schema} submit={submit} url="/api/nopass/send/"></ur-form>
     </div>
   </div>
+<script>
+  this.mixin(ThemeMixin)
+  this.schema = {
+    email: {type: 'email'}
+  }
+  this.submit = form => {
+    ajax({
+      url: "/api/nopass/send/",
+      data: form.getData(),
+      method: "POST",
+    }).then(r=> console.log(r))
+  }
+</script>
 </ur-auth-login>

@@ -27,7 +27,11 @@ export default (func, data = {}) => {
       if (!auth.user || data.force) {
         auth.AUTH_SUCCESS = success
         data.next = window.location.href
-        router.route(auth.urls.start, data)
+        if (auth.auto) {
+          router.route(auth.urls.register, data)
+        } else {
+          router.route(auth.urls.start, data)
+        }
       } else {
         success()
       }

@@ -19,7 +19,7 @@ this.on("mount",function() {
   uR.db.apps.map(app => {
     const url_root = `#!/admin/${app.name}/`
     this.tbody.push([`<a href="${url_root}">${app.verbose_name}</a>`,""])
-    app._models.map(model => {
+    app._models.filter(model => model.objects).map(model => {
       this.tbody.push([
         `<a href="${url_root}${model.model_name}/">${model.verbose_name}</a>`,
         model.objects.all().length

@@ -15,7 +15,7 @@ const admin = {
   },
 
   start: () => uR.auth.ready(() => {
-    if (!uR.auth.user.is_superuser) {
+    if (!uR.auth.user || !uR.auth.user.is_superuser) {
       return
     }
     const { routeElement } = uR.router

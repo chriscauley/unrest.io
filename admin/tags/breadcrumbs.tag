@@ -37,7 +37,6 @@ class BreadCrumbs {
   this.hostname = window.location.hostname.split(".")[0]
 
   const { app, obj, model } = this.parent
-  console.log(app)
   const _bc = new BreadCrumbs(app,model,obj)
   this.items = _bc.items
   this.items[this.items.length-1].last = true
