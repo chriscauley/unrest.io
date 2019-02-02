@@ -3,6 +3,7 @@
 // options && riot.mount(element,options)
 
 import riot from 'riot'
+import emptyElement from './emptyElement'
 
 export default (tagName, attrs, riot_opts) => {
   const element = document.createElement(tagName)
@@ -13,11 +14,7 @@ export default (tagName, attrs, riot_opts) => {
     if (attrs.clear) {
       // #! TODO there's probably a better way to handle this
       // technically clear isn't an attribute, but we need a way to empty the parent
-      const children = attrs.parent.childNodes
-      let i = attrs.parent.childNodes.length
-      while (i--) {
-        attrs.parent.removeChild(children[i])
-      }
+      emptyElement(attrs.parent)
       delete attrs.clear
     }
     attrs.parent.appendChild(element)
