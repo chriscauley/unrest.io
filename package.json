@@ -1,6 +1,6 @@
 {
   "name": "unrest.io",
-  "version": "0.0.1a",
+  "version": "0.0.1b",
   "description": "A schema driven web framework built on riot.js",
   "main": "dist/index.js",
   "source": "index.js",
