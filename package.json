@@ -1,6 +1,6 @@
 {
   "name": "unrest.io",
-  "version": "0.0.1b",
+  "version": "0.0.1d",
   "description": "A schema driven web framework built on riot.js",
   "main": "dist/index.js",
   "source": "index.js",
@@ -9,6 +9,7 @@
   },
   "scripts": {
     "watch": "parcel watch index.js less/base.less",
+    "build": "parcel build index.js less/base.less",
     "test": "./bin/test"
   },
   "repository": {
