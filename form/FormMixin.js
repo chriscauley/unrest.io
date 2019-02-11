@@ -24,6 +24,10 @@ const getCls = opts => {
 
 export default {
   prepOpts: function() {
+    this.opts.opts && Object.assign(
+      this.opts,
+      this.opts.opts,
+    )
     const { matches } = this.opts
     if (matches && db[matches[1]]) {
       this.opts.model = db[matches[1]]

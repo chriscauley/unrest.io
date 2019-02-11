@@ -1,7 +1,7 @@
 import FormMixin from '../FormMixin'
 import ThemeMixin from '../../css/ThemeMixin'
 
-<ur-form>
+<ur-form class="ur-form">
   <div class={ theme.outer }>
     <div class={ theme.header } if={ title }>
       <div class={ theme.header_title}>{ title }</div>
@@ -11,13 +11,15 @@ import ThemeMixin from '../../css/ThemeMixin'
       <form onsubmit={ submit } class={ className }>
         <yield from="pre-form"/>
 
-        <div each={ input,_i in inputs } class={ input.css.field }>
-          <label if={ css.form.label } for={ input.id } class={ input.css.label }>
-            { input.label }
-          </label>
-          <div data-is={ input.tagName } input={ input }></div>
-          <div class={ input.css.error }>{ input.error }</div>
-          <div class={ input.css.help_text }>{ input.help_text }</div>
+        <div class="fields">
+          <div each={ input,_i in inputs } class={ input.css.field }>
+            <label if={ css.form.label } for={ input.id } class={ input.css.label }>
+              { input.label }
+            </label>
+            <div data-is={ input.tagName } input={ input }></div>
+            <div class={ input.css.error }>{ input.error }</div>
+            <div class={ input.css.help_text }>{ input.help_text }</div>
+          </div>
         </div>
 
         <div class="button_div">
