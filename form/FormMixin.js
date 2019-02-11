@@ -48,10 +48,10 @@ export default {
       title: this.opts.title,
       addInputs: (opts = this.opts) => {
         const { object, model } = opts
-        let fields, fieldnames, submit
+        let _fields, fieldnames, submit
         if (object) {
           opts.initial = object.serialize()
-          fields = new Map([...object.META.fields])
+          _fields = object.META.fields
           fieldnames = object.getFieldnames()
           submit = () => {
             Object.assign(object, this.getData())
@@ -63,7 +63,7 @@ export default {
           }
         } else if (model) {
           model.__makeMeta()
-          fields = new Map([...model.META.fields])
+          _fields = model.META.fields
           fieldnames = model.editable_fieldnames || []
           submit = () => {
             model.objects.create(this.getData())
@@ -71,11 +71,16 @@ export default {
             riot.update()
           }
         } else if (opts.schema) {
-          fields = new Map(Object.entries(opts.schema))
+          _fields = new Map(Object.entries(opts.schema))
           fieldnames = [...fields.keys()]
         } else {
           throw 'ValueError: <ur-form> requires a schema, model, or object'
         }
+
+        const fields = new Map()
+        fieldnames.forEach( (fieldname) => {
+          fields.set( fieldname, _fields.get(fieldname) )
+        })
 
         // called by tag when form is submitted
         opts.submit = opts.submit || submit
