@@ -1,6 +1,7 @@
 import Ready from '../ready'
 import APIManager from "./APIManager"
 import BaseManager from "./BaseManager"
+import StorageManager from "./StorageManager"
 import Model from "./Model"
 import * as fields from "./fields"
 import unslugify, { camel2SpaceCase } from '../schema/unslugify'
@@ -30,7 +31,7 @@ const _getOrCreateApp = app_label => {
 const register = model => {
   _nameAppAndModel(model)
 
-  let { app_label, model_name, slug } = model
+  const { app_label, model_name, slug } = model
   const app = _getOrCreateApp(app_label)
 
   // assign model to app and uR.db
@@ -46,6 +47,7 @@ const db = {
   register,
   APIManager,
   BaseManager,
+  StorageManager,
   Model,
   fields,
   apps: [],

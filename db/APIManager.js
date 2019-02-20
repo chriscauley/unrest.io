@@ -4,15 +4,10 @@ import BaseManager from './BaseManager'
 
 export default class APIManager extends BaseManager {
   create = data => {
+    this.normalize(data)
+
     // #! TODO should be db.ready.block or db.ready.ajax
     db.ready.stop()
-    Object.entries(data).forEach(([key,value]) => {
-      // this is just for foreign key
-      // maybe the Model should constructor could serialize it first?
-      if (value instanceof db.Model) {
-        data[key] = value.id
-      }
-    })
     return ajax({
       url: this._get_base_url(),
       method: 'POST',
