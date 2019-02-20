@@ -42,6 +42,13 @@ Object.assign(uR, {
   TrueDate: window.Date,
 })
 
+if (typeof window !== undefined) {
+  if (window.__HMR_SKIP) {
+    window.location.reload()
+  }
+  window.__HMR_SKIP = true
+}
+
 uR.ready.then(() => {
   if (typeof document !== 'undefined') {
     const scripts = [...document.querySelectorAll('script')].map(s => s.src)
@@ -50,6 +57,8 @@ uR.ready.then(() => {
   uR.db.ready.start()
   uR.db.ready.then(() => {
     uR.auth.reset()
-    uR.router.ready.start()
+    uR.auth.ready(
+      uR.router.ready.start
+    )
   })
 })
