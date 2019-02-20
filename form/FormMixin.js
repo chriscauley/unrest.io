@@ -72,7 +72,7 @@ export default {
           }
         } else if (opts.schema) {
           _fields = new Map(Object.entries(opts.schema))
-          fieldnames = [...fields.keys()]
+          fieldnames = [..._fields.keys()]
         } else {
           throw 'ValueError: <ur-form> requires a schema, model, or object'
         }
