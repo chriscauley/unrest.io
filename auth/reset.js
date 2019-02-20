@@ -8,6 +8,7 @@ export default () => {
       username: "TEST USER",
       email: "anon@example.com",
       id: -1,
+      is_superuser:true,
     })
     auth.ready.start()
     if (auth.user && auth.AUTH_SUCCESS) {
