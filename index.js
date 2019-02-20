@@ -23,9 +23,11 @@ import auth from './auth'
 import storage from './storage'
 import db from './db'
 import admin from './admin'
+import Controller from './Controller'
 import './tags'
 
 Object.assign(uR, {
+  Controller,
   element,
   schema,
   form,
