@@ -17,6 +17,9 @@ router.ready(() => {
 
   // if router has not been activated, trigger for current location
   !router._stale && router.route(window.location.href)
+  window.addEventListener('hashchange', () => {
+    route(window.location.hash)
+  })
 })
 
 export default router
