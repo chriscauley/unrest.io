@@ -37,19 +37,24 @@ class Input {
     }
   }
 
-  _createInput() {
-    const attrs = _.pick(this, this.ATTRS)
-
-    attrs.type = this.input_type
-    attrs.parent = this.tag.root
-    attrs.className = this.css.input
+  _createInput(attrs) {
+    attrs = {
+      ...attrs,
+      type: this.input_type,
+      parent: this.tag.root,
+      className: this.css.input,
+    }
     this._input = create(this.input_tagname, _.omitBy(attrs, _.isNil))
+  }
+
+  createInput() {
+    this._createInput(_.pick(this, this.ATTRS))
   }
 
   bindTag(tag) {
     this.tag = tag
     tag.input = this
-    this._createInput()
+    this.createInput()
     this.bindEvents(this._input)
     this._checkValidity()
   }

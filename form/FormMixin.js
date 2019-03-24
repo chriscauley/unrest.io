@@ -7,6 +7,7 @@ import db from '../db'
 import config from './config'
 import Input from './Input'
 import Select from './Select'
+import Checkbox from './Checkbox'
 
 const getCls = opts => {
   // config will be used here eventually
@@ -17,6 +18,9 @@ const getCls = opts => {
     return config.type2class[opts.type]
   }
   if (opts.choices) {
+    if (opts.type === 'list') {
+      return Checkbox
+    }
     return Select
   }
   return Input
@@ -47,7 +51,7 @@ export default {
     _.assign(this, {
       title: this.opts.title,
       addInputs: (opts = this.opts) => {
-        const { object, model } = opts
+        const { object, model, editable_fieldnames } = opts
         let _fields, fieldnames, submit
         if (object) {
           opts.initial = object.serialize()
@@ -64,7 +68,7 @@ export default {
         } else if (model) {
           model.__makeMeta()
           _fields = model.META.fields
-          fieldnames = model.editable_fieldnames || []
+          fieldnames = model.editable_fieldnames || editable_fieldnames
           submit = () => {
             model.objects.create(this.getData())
             this.unmount()
@@ -94,7 +98,6 @@ export default {
       addInput: field => {
         // converts a schema field to input options
         const opts = {
-          tagName: 'ur-input',
           label: schema.unslugify(field.name),
           id: `${this.prefix || ''}__${field.name}`,
         }
@@ -123,7 +126,7 @@ export default {
       },
 
       getData() {
-        const result = {}
+        const result = { ...this.opts.initial }
         this.inputs.forEach(f => (result[f.name] = f.value))
         return result
       },

@@ -3,11 +3,11 @@ import create from '../element/create'
 import Input from './Input'
 
 export default class Select extends Input {
-  _createInput() {
+  createInput() {
     this.css.input = 'form-select'
     this.input_tagname = 'select'
     this.input_type = undefined
-    super._createInput()
+    super.createInput()
     this.choices = prepChoices(this)
     this.choices.forEach(c => {
       create('option', {
