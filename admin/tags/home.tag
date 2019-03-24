@@ -14,18 +14,17 @@ import uR from '../../index'
 <script>
 this.mixin(uR.css.ThemeMixin)
 this.on("mount",function() {
-  this.thead = ["App Label","Count"]
+  this.thead = ["Model","Count"]
   this.tbody = []
   uR.db.apps.map(app => {
     const url_root = `#!/admin/${app.name}/`
-    this.tbody.push([`<a href="${url_root}">${app.verbose_name}</a>`,""])
-    app._models.filter(model => model.objects).map(model => {
-      this.tbody.push([
-        `<a href="${url_root}${model.model_name}/">${model.verbose_name}</a>`,
+    app._models.filter(model => model.objects).map(
+      model => this.tbody.push([
+        `<a href="${url_root}${model.model_name}/">${model.slug}</a>`,
         model.objects.all().length
       ])
-    })
-  });
+    )
+  })
 });
 </script>
 </ur-admin-home>
