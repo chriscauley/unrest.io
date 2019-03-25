@@ -7,7 +7,7 @@ import uR from '../../index'
       <div class={ theme.header_title }>
         { model.verbose_name } Admin
         <a class="{ uR.css.btn.primary } { uR.css.right }"
-           href="#!/admin/{app.name}/{model.name}/new/">New { model.verbose_name }</a>
+           href="#!/admin/{app.name}/{model.model_name}/new/">New { model.verbose_name }</a>
       </div>
     </div>
     <div class={ theme.content }>

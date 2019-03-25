@@ -19,7 +19,7 @@ this.on("before-mount",function() {
   this.thead = ["Model","Count"]
   this.tbody = this.app._models.map(function(model) {
     return [
-      `<a href="#!/admin/${app_label}/${model.name}/">${model.verbose_name}</a>`,
+      `<a href="#!/admin/${app_label}/${model.model_name}/">${model.verbose_name}</a>`,
       model.objects.all().length
     ]
   })

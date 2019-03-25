@@ -7,7 +7,7 @@ class BreadCrumbs {
     this.path = "#!/"
     this.addPath("Home",'admin')
     app && this.addPath(app.name)
-    model && this.addPath(model.name)
+    model && this.addPath(model.model_name)
     obj && this.addPath(obj,obj.id)
   }
   addPath(text,path) {
