@@ -13,7 +13,7 @@ export default class APIManager extends BaseManager {
       method: 'POST',
       data: data,
     })
-      .then(this.set)
+      .then(this._set)
       .then(db.ready.start) //#! TODO
   }
 
@@ -24,7 +24,7 @@ export default class APIManager extends BaseManager {
       .then(response => {
         this.pagination = response.pagination
         this.items = new Map()
-        response.results.forEach(this.set)
+        response.results.forEach(this._set)
       })
       .then(db.ready.start) //#! TODO
   }

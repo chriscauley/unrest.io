@@ -49,7 +49,6 @@ export default () => {
       data_sets.forEach(
         ([result,inputs]) => inputs.forEach(input => {
           obj[name] = input
-          console.log(input,typeof obj.serialize()[name])
           expect(obj.serialize()[name]).to.equal(result)
         })
       )

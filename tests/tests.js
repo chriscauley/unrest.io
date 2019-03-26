@@ -11,8 +11,8 @@ import fieldTests from './fieldTests'
 
 window.location.hash = '#'
 
-//describe('uR.auth', authTests)
-//describe('uR.router',routerTests)
-//describe('uR.Model', objectTests)
-//describe('uR.ready',readyTests)
-describe('uR.ready',fieldTests)
+describe('uR.auth', authTests)
+describe('uR.router',routerTests)
+describe('uR.Model', objectTests)
+describe('uR.ready',readyTests)
+describe('uR.db.fields',fieldTests)

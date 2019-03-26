@@ -63,7 +63,12 @@ const DateTime = (opts = {}) => {
   const field = Field(initial,opts)
   return Object.assign(field, {
     type: 'datetime',
-    serialize: value => (value && value.valueOf)?value.valueOf():value,
+    serialize: value => {
+      if (typeof value === "string") {
+        return new Date(value).valueOf()
+      }
+      return (value && value.valueOf)?value.valueOf():value
+    },
   })
 }
 

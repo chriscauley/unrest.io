@@ -4,32 +4,31 @@ export default class BaseManager {
   constructor(model) {
     this.model = model
     this.refresh()
-    this.id = 0
   }
 
-  create = data => {
+  create = (data={}) => {
     this.normalize(data)
-    data.id = ++this.id
-    return this.set(data)
+    const obj = new this.model(data)
+    return this.save(obj)
   }
 
   normalize(data) {
     Object.entries(data).forEach(([key,value]) => {
       // this is just for foreign key
-      // maybe the Model should constructor could serialize it first?
+      // maybe the Model constructor could serialize it first?
       if (value instanceof db.Model) {
         data[key] = value.id
       }
     })
   }
 
-  save = obj => this.create(obj.serialize())
+  save = obj => {
+    this._set(obj)
+    return Promise.resolve(obj)
+  }
 
-  set = data => {
-    const obj = new this.model(data)
+  _set = obj => {
     this.items.set(obj.id, obj)
-    this[obj.id] = obj
-    return obj
   }
 
   all() {

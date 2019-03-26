@@ -43,7 +43,11 @@ class Model {
       manager = manager || cls.manager
     }
     const fields = (this.META.fields = new Map(
-      Object.entries(_.defaults({}, ..._.reverse(fieldsets))),
+      Object.entries(_.defaults(
+        {},
+        manager && manager.fields,
+        ..._.reverse(fieldsets),
+      )),
     ))
     fields.forEach((field, name) => {
       let _type = typeof field
