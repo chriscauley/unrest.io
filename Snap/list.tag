@@ -31,17 +31,33 @@ import { diffLines } from 'diff'
 
 <snap-detail>
   <h2>{result.id} {result.key}</h2>
+  <button onclick={accept} if={!result.ok} class={css.btn.success}>
+    Accept</button>
+  <button onclick={reject} if={result.ok} class={css.btn.cancel}>
+    Reject</button>
   <snap-diff diff={diff}></snap-diff>
 <script>
+  this.mixin(uR.css.Mixin)
   this.result = {}
   this.on('mount', () => this.update())
   this.on('update', () => {
     this.result = this.opts.result
     const { success, old_value, new_value } = this.result
+    this.result.ok = this.result.accepted || success
 
     const prep = obj => JSON.stringify(obj,null,2) || 'UNDEFINED'
     this.diff = diffLines(prep(old_value),prep(new_value))
   })
+  accept() {
+    this.result.accept()
+    this.result.accepted = true
+    this.parent.update()
+  }
+  reject() {
+    this.result.reject()
+    this.result.accepted = this.result.success = false
+    this.parent.update()
+  }
 </script>
 </snap-detail>
 
@@ -80,11 +96,6 @@ this.on('mount', () => {
 this.on('update', () => {
   this.snapshots = Snap.snapshots
 })
-accept(e) {
-  const { result } = e.item
-  result.accepted = true
-  result.accept()
-}
 select(e) {
   const { result } = e.item
   this.selected = (this.selected === result) ? undefined: result

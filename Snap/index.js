@@ -16,15 +16,15 @@ const Snap = test_set => {
   const storage = new Storage('Snap:' + name)
   const match = (key, new_value) => {
     const old_value = storage.get(key)
-    const accept = () => {
-      storage.set(key, new_value)
-    }
+    const accept = () => storage.set(key, new_value)
+    const reject = () => storage.remove(key)
     const result = {
       id: current_id++,
       key,
       old_value,
       new_value,
       accept,
+      reject,
       success: _.isEqual(old_value, new_value),
     }
     results.push(result)
@@ -35,12 +35,13 @@ const Snap = test_set => {
     match,
     results,
     done: callback =>
-      results.find(result => {
-        if (!result.success) {
-          callback(`${name}: ${result.key} did not match`)
-          return true
-        }
-      }),
+      callback(
+        results.find(result => {
+          if (!result.success) {
+            return `${name}: ${result.key} did not match`
+          }
+        }),
+      ),
   }
 }
 
