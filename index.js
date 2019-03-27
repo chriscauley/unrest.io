@@ -24,9 +24,11 @@ import storage from './storage'
 import db from './db'
 import admin from './admin'
 import Controller from './Controller'
+import Snap from './Snap'
 import './tags'
 
 Object.assign(uR, {
+  Snap,
   Controller,
   element,
   schema,
