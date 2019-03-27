@@ -5,14 +5,14 @@ import { diffLines } from 'diff'
 <snap-diff>
   <pre><div each={r in rows} class={r.className}>{r.text}</div></pre>
 <script>
-  this.on("mount",() => this.update())
-  this.on("update", () => {
+  this.on('mount', () => this.update())
+  this.on('update', () => {
     this.rows = []
     this.opts.diff.forEach(item => {
-      const [className,pre] = getClassPre(item)
-      item.value.split('\n').forEach( text => {
+      const [className, pre] = getClassPre(item)
+      item.value.split('\n').forEach(text => {
         this.rows.push({
-          text: pre+text,
+          text: pre + text,
           className,
         })
       })
@@ -20,11 +20,11 @@ import { diffLines } from 'diff'
   })
   const getClassPre = item => {
     if (item.added) {
-      return ["text-success","+ "]
+      return ['text-success', '+ ']
     } else if (item.removed) {
-      return ["text-error","- "]
+      return ['text-error', '- ']
     }
-    return ["text","  "]
+    return ['text', '  ']
   }
 </script>
 </snap-diff>
@@ -34,12 +34,12 @@ import { diffLines } from 'diff'
   <snap-diff diff={diff}></snap-diff>
 <script>
   this.result = {}
-  this.on("mount",() => this.update())
-  this.on("update", () => {
+  this.on('mount', () => this.update())
+  this.on('update', () => {
     this.result = this.opts.result
     const { success, old_value, new_value } = this.result
 
-    const prep = obj => JSON.stringify(obj,null,2) || "UNDEFINED"
+    const prep = obj => JSON.stringify(obj,null,2) || 'UNDEFINED'
     this.diff = diffLines(prep(old_value),prep(new_value))
   })
 </script>
@@ -73,11 +73,11 @@ import { diffLines } from 'diff'
     </div>
   </div>
 <script>
-this.on("mount",() => {
-  Snap.on('update',() => this.update())
+this.on('mount', () => {
+  Snap.on('update', () => this.update())
   this.update()
 })
-this.on("update", () => {
+this.on('update', () => {
   this.snapshots = Snap.snapshots
 })
 accept(e) {
@@ -103,11 +103,11 @@ this.getIcon = result => {
 }
 this.getClass = result => {
   if (result.success || result.accepted) {
-    return "text-success"
+    return 'text-success'
   } else if (result.fail) {
-    return "text-error"
+    return 'text-error'
   } else {
-    return "text-warning"
+    return 'text-warning'
   }
 }
 </script>

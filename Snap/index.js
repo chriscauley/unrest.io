@@ -14,12 +14,11 @@ const Snap = test_set => {
     name,
     results,
   })
-  const storage = new Storage("Snap:"+name)
-  const match = (key,new_value) => {
+  const storage = new Storage('Snap:' + name)
+  const match = (key, new_value) => {
     const old_value = storage.get(key)
     const accept = () => {
-      storage.set(key,new_value)
-      console.log("Accepted!")
+      storage.set(key, new_value)
     }
     const result = {
       id: current_id++,
@@ -27,11 +26,11 @@ const Snap = test_set => {
       old_value,
       new_value,
       accept,
-      success: _.isEqual(old_value,new_value),
+      success: _.isEqual(old_value, new_value),
     }
     results.push(result)
-    //expect(results.success).to.be.true
-    Snap.trigger("update")
+    expect(results.success).to.be.true
+    Snap.trigger('update')
   }
 
   return {
