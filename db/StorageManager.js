@@ -23,7 +23,9 @@ export default class StorageManager extends BaseManager {
   refresh() {
     super.refresh()
     this.storage = this.storage || new Storage(this.model.slug)
-    this.storage.clear()
+    this.storage.keys.forEach(key => {
+      this.save(new this.model(this.storage.get(key)))
+    })
     return Promise.resolve()
   }
 }

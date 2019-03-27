@@ -3,6 +3,7 @@ import db from '../db'
 export default class BaseManager {
   constructor(model) {
     this.model = model
+    this.model.__makeMeta()
     this.refresh()
   }
 

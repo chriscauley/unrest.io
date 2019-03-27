@@ -30,6 +30,7 @@ class Model {
 
   static __makeMeta() {
     // this is for model level setup (eg primitives to fields or adding manager)
+    this.__makeMeta = () => {} // only execute once!
     this.META = {}
     let cls = this
     let manager = this.manager
@@ -66,14 +67,12 @@ class Model {
       field.model = this
     })
 
-    if (manager) {
+    if (manager && !this.objects) {
       this.objects = new manager(this)
     }
     this.prototype.toString = function() {
       return this.__str__()
     }
-
-    this.__makeMeta = () => {} // only execute once!
   }
 
   deserialize(json = {}) {
