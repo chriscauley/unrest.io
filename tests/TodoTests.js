@@ -42,11 +42,11 @@ export default () => {
       snap.match('incomplete', obj.serialize())
       obj.completed = true
       snap.match('complete', obj.serialize())
+      return Todo.objects.save(obj)
+    }).then(obj => {
       Todo.objects.refresh()
-
-      const new_obj = Todo.objects.get(id)
-      expect(new_obj === obj).to.be.false
-      snap.match('complete', new_obj.serialize())
+      console.log(obj)
+      snap.match('complete', obj.serialize())
       done()
     })
   })

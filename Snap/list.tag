@@ -2,31 +2,45 @@ import Snap from './index'
 import uR from '../index'
 import { diffLines } from 'diff'
 
+<snap-diff>
+  <pre><div each={r in rows} class={r.className}>{r.text}</div></pre>
+<script>
+  this.on("mount",() => this.update())
+  this.on("update", () => {
+    this.rows = []
+    this.opts.diff.forEach(item => {
+      const [className,pre] = getClassPre(item)
+      item.value.split('\n').forEach( text => {
+        this.rows.push({
+          text: pre+text,
+          className,
+        })
+      })
+    })
+  })
+  const getClassPre = item => {
+    if (item.added) {
+      return ["text-success","+ "]
+    } else if (item.removed) {
+      return ["text-error","- "]
+    }
+    return ["text","  "]
+  }
+</script>
+</snap-diff>
+
 <snap-detail>
   <h2>{result.id} {result.key}</h2>
-  <div>
-    <pre><div each={row in rows} class={row.className}>{row.text}</div></pre>
-  </div>
+  <snap-diff diff={diff}></snap-diff>
 <script>
   this.result = {}
   this.on("mount",() => this.update())
   this.on("update", () => {
-    const getClass = row => {
-      if (row.added) {
-        return "text-success"
-      } else if (row.removed) {
-        return "text-error"
-      }
-    }
     this.result = this.opts.result
     const { success, old_value, new_value } = this.result
 
     const prep = obj => JSON.stringify(obj,null,2) || "UNDEFINED"
-    const diffs = diffLines(prep(old_value),prep(new_value))
-    this.rows = diffs.map( row => ({
-      text: row.value,
-      className: getClass(row),
-    }))
+    this.diff = diffLines(prep(old_value),prep(new_value))
   })
 </script>
 </snap-detail>
