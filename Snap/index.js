@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import _ from 'lodash'
 import riot from 'riot'
 
@@ -29,12 +28,19 @@ const Snap = test_set => {
       success: _.isEqual(old_value, new_value),
     }
     results.push(result)
-    expect(results.success).to.be.true
     Snap.trigger('update')
   }
 
   return {
     match,
+    results,
+    done: callback =>
+      results.find(result => {
+        if (!result.success) {
+          callback(`${name}: ${result.key} did not match`)
+          return true
+        }
+      }),
   }
 }
 

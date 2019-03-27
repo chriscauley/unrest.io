@@ -47,7 +47,7 @@ export default () => {
       .then(obj => {
         Todo.objects.refresh()
         snap.match('complete', obj.serialize())
-        done()
+        snap.done(done)
       })
   })
 }
