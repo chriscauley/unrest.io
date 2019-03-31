@@ -4,6 +4,7 @@ export default class BaseManager {
   constructor(model) {
     this.model = model
     model.manager = model.manager || this.constructor
+    model.objects = this
     this.model.__makeMeta()
     this.refresh()
   }

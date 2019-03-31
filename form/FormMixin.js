@@ -82,6 +82,9 @@ export default {
         }
 
         const fields = new Map()
+        if (!fieldnames) {
+          throw "ur-form cannot be used without fieldnames"
+        }
         fieldnames.forEach( (fieldname) => {
           fields.set( fieldname, _fields.get(fieldname) )
         })
