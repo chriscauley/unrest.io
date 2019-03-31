@@ -16,7 +16,6 @@ const {
 } = uR.db
 
 class BaseModel extends Model {
-  static manager = StorageManager
   static fields = {
     id: Int(),
   }

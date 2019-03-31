@@ -3,6 +3,7 @@ import db from '../db'
 export default class BaseManager {
   constructor(model) {
     this.model = model
+    model.manager = model.manager || this.constructor
     this.model.__makeMeta()
     this.refresh()
   }
@@ -29,6 +30,12 @@ export default class BaseManager {
   }
 
   _set = obj => {
+    if (!(obj instanceof this.model)) {
+      obj = new this.model(obj)
+    }
+    if (!obj.id) {
+      throw "Object cannot be set without id"
+    }
     this.items.set(obj.id, obj)
   }
 
