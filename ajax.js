@@ -22,7 +22,13 @@ const ajax = opts => {
     }
   }
 
-  return fetch(url, fetch_opts).then(response => response.json())
+  return fetch(url, fetch_opts)
+    .then(response => {
+      if (response.status >= 400) {
+        throw "NotImplemented: HTTP" + response.status
+      }
+      return response.json()
+    })
 }
 
 export default ajax

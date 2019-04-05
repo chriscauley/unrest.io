@@ -59,18 +59,19 @@ export default {
           fieldnames = object.getFieldnames()
           submit = () => {
             Object.assign(object, this.getData())
-            object.constructor.objects.create({
+            return object.constructor.objects.create({
               ...object.serialize(),
+            }).then(result => {
+              this.unmount()
+              riot.update()
             })
-            this.unmount()
-            riot.update()
           }
         } else if (model) {
           model.__makeMeta()
           _fields = model.META.fields
           fieldnames = editable_fieldnames || model.editable_fieldnames
           submit = () => {
-            model.objects.create(this.getData()).then(item => {
+            return model.objects.create(this.getData()).then(item => {
               opts.success && opts.success(item)
               riot.update()
             })

@@ -22,6 +22,8 @@ import ThemeMixin from '../../css/ThemeMixin'
           </div>
         </div>
 
+        <div if={error} class={css.error} style="display: block;">{error}</div>
+
         <div class="button_div">
           <yield from="button_div"/>
           <button class={ css.btn.success } onclick={ submit } disabled={!valid}>
@@ -46,13 +48,18 @@ this.on("update", () => {
 })
 
 submit(e) {
+  this.error = undefined
   e && e.preventDefault && e.preventDefault()
   if (!this.checkValidity()) { // one last check
     this.form.inputs.forEach( input => input.show_error = true );
     this.update();
     return;
   }
-  this.opts.submit(this)
+  this.update()
+  this.opts.submit(this).catch(e=> {
+    this.error = "An unknown error has occurred: "+e
+    this.update()
+  })
 }
 
 cancel(e) {
