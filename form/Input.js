@@ -24,7 +24,7 @@ class Input {
     })
     this.css = {
       label: css.form.label,
-      field: css.form.field + ' ur-' + opts.type,
+      field: `${css.form.field} ur-${opts.type} field__${this.name}`,
       input: css.form.input,
     }
     this._updateCss()
