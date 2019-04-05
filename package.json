@@ -1,6 +1,6 @@
 {
   "name": "unrest.io",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A schema driven web framework built on riot.js",
   "main": "dist/index.js",
   "source": "index.js",
@@ -53,10 +53,13 @@
       "@babel/plugin-transform-runtime"
     ],
     "presets": [
-      [ "@babel/preset-env", {
-        "useBuiltIns": "entry",
-        "corejs": 2
-      }]
+      [
+        "@babel/preset-env",
+        {
+          "useBuiltIns": "entry",
+          "corejs": 2
+        }
+      ]
     ]
   }
 }
