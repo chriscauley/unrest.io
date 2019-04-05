@@ -7,7 +7,6 @@ import { Int } from './fields'
 export default class StorageManager extends BaseManager {
   constructor(opts) {
     super(opts)
-    this.next_id = 1
   }
   static fields = {
     id: Int(undefined,{required: false})
@@ -22,9 +21,12 @@ export default class StorageManager extends BaseManager {
 
   refresh() {
     super.refresh()
+    this.next_id = 1
     this.storage = this.storage || new Storage(this.model.slug)
     this.storage.keys.forEach(key => {
-      this.save(new this.model(this.storage.get(key)))
+      const obj = new this.model(this.storage.get(key))
+      this.next_id = Math.max(this.next_id,obj.id + 1)
+      this.save(obj)
     })
     return Promise.resolve()
   }
