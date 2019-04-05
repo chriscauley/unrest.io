@@ -38,6 +38,7 @@ export default class BaseManager {
       throw "Object cannot be set without id"
     }
     this.items.set(obj.id, obj)
+    return obj
   }
 
   all() {

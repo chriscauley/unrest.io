@@ -13,8 +13,11 @@ export default class APIManager extends BaseManager {
       method: 'POST',
       data: data,
     })
-      .then(this._set)
-      .then(db.ready.start) //#! TODO
+      .then(data => {
+        const obj = this._set(data)
+        db.ready.start() //#! TODO
+        return obj
+      })
   }
 
   refresh() {

@@ -68,11 +68,12 @@ export default {
         } else if (model) {
           model.__makeMeta()
           _fields = model.META.fields
-          fieldnames = model.editable_fieldnames || editable_fieldnames
+          fieldnames = editable_fieldnames || model.editable_fieldnames
           submit = () => {
-            model.objects.create(this.getData())
-            this.unmount()
-            riot.update()
+            model.objects.create(this.getData()).then(item => {
+              opts.success && opts.success(item)
+              riot.update()
+            })
           }
         } else if (opts.schema) {
           _fields = new Map(Object.entries(opts.schema))
