@@ -7,6 +7,9 @@ export default choices => {
   if (typeof choices === 'function') {
     choices = choices()
   }
+  if (choices instanceof Map) {
+    choices = [...choices.keys()]
+  }
   return choices.map(c => {
     const type = typeof c
     if (type === 'undefined') {

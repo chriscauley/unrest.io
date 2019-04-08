@@ -62,7 +62,7 @@ export default {
             return object.constructor.objects.create({
               ...object.serialize(),
             }).then(result => {
-              this.unmount()
+              opts.success && opts.success(item)
               riot.update()
             })
           }
