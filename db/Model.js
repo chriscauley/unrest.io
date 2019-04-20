@@ -19,7 +19,7 @@ class Model {
   makeOpts(opts) {
     const base_opts = { ...this.constructor.opts }
     for (const [key, default_value] of Object.entries(base_opts)) {
-      this[key] = opts[key] || default_value
+      this[key] = opts[key] === undefined ? default_value : opts[key]
     }
   }
 
