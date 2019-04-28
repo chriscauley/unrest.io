@@ -20,14 +20,15 @@ export default (href, data = {}) => {
 
   router.trigger('route')
   if (hash_match) {
-    extend(data, {
+    data = {
       matches: hash_match,
       ur_modal: new_url.hash.match(router.MODAL_PREFIX),
       cancel: function() {
         window.location.hash = ''
         this.unmount && this.unmount()
       },
-    })
+      ...data,
+    }
     router._routes[hash_match.key](new_url.hash, data)
   }
 

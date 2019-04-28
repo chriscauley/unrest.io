@@ -3,7 +3,10 @@ import router from './router'
 
 export default (element_name, opts = {}) => {
   return (pathname, data = {}) => {
-    Object.assign(data, opts)
+    data = {
+      ...data,
+      ...(typeof opts === 'function' ? opts(pathname,data):opts),
+    }
     const tagName = element_name.toUpperCase()
     const _current = router._current_tag
 
@@ -16,9 +19,6 @@ export default (element_name, opts = {}) => {
       // reuse _current_tag since it matches the desired route
       _current.trigger('route', data)
     } else {
-      data.cancel = () => {
-        router.clearHash()
-      }
       element.create(element_name, attrs, data)
     }
   }
