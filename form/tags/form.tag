@@ -23,6 +23,8 @@ import ThemeMixin from '../../css/ThemeMixin'
         </div>
 
         <div if={error} class={css.error} style="display: block;">{error}</div>
+        <div if={success_message} class={css.success} style="display: block;">
+          {success_message}</div>
 
         <div class="button_div">
           <yield from="button_div"/>
@@ -59,6 +61,7 @@ submit(e) {
   this.opts.submit(this).catch(e=> {
     this.error = "An unknown error has occurred: "+e
     this.update()
+    throw e
   })
 }
 

@@ -61,7 +61,8 @@ export default {
             Object.assign(object, this.getData())
             return object.constructor.objects.create({
               ...object.serialize(),
-            }).then(result => {
+            }).then(item => {
+              this.success_message = `${item} has been saved`
               opts.success && opts.success(item)
               riot.update()
             })
@@ -72,6 +73,7 @@ export default {
           fieldnames = editable_fieldnames || model.editable_fieldnames
           submit = () => {
             return model.objects.create(this.getData()).then(item => {
+              this.success_message = `${item} has been created`
               opts.success && opts.success(item)
               riot.update()
             })
