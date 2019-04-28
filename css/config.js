@@ -49,14 +49,15 @@ const spectre = {
     header_title: 'modal-title h4',
   },
   form: {
-    field: 'form-group',
+    field: 'form-group mb-2',
     input: 'form-input',
     label: 'form-label',
   },
   btn: {
     group_block: 'btn-group btn-group-block',
   },
-  error: 'label label-error',
+  error: 'label label-error mb-2',
+  success: 'label label-success mb-2',
   hide: 'd-hide',
   text: {
     primary: 'text-primary',
