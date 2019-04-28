@@ -18,6 +18,7 @@ export default (href, data = {}) => {
   const path_match = resolve(pathname)
   const hash_match = new_url && resolve(new_url.hash)
 
+  router.trigger('route')
   if (hash_match) {
     extend(data, {
       matches: hash_match,
