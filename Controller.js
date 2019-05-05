@@ -1,6 +1,13 @@
 import _ from 'lodash'
 import db from './db'
 
+const actions = [
+  'mouseover', 'mouseout', 'mousemove',
+  'mouseclick', 'mouseup', 'mousedown',
+  'mousewheel',
+  'keydown', 'keyup',
+]
+
 export default class Controller extends db.Model {
   static slug = "unrest.Controller"
   static opts = {
@@ -10,6 +17,7 @@ export default class Controller extends db.Model {
   }
   constructor(opts) {
     super(opts)
+    this.bound_actions = []
     this.bindKeys()
   }
   bindKeys() {
@@ -19,14 +27,17 @@ export default class Controller extends db.Model {
     parent.tabIndex = parent.tabIndex || "0"
     parent.focus()
 
-    const actions = [
-      'mouseover', 'mouseout', 'mousemove',
-      'mouseclick', 'mouseup', 'mousedown',
-      'mousewheel',
-      'keydown', 'keyup',
-    ]
-    actions.forEach( action => {
-      this.target[action] && parent.addEventListener(action,(e) => this.target[action](e));
+    actions.filter(action => this.target[action])
+      .forEach( action => {
+        const func = e => this.target[action](e)
+        this.bound_actions.push([action, func])
+        parent.addEventListener(action, func)
+      })
+  }
+  unmount = () => {
+    const { parent } = this
+    this.bound_actions.forEach(([action, func]) => {
+      parent.removeEventListener(action, func)
     })
   }
 }
