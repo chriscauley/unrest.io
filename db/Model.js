@@ -17,8 +17,8 @@ class Model {
   }
 
   makeOpts(opts) {
-    const base_opts = { ...this.constructor.opts }
-    for (const [key, default_value] of Object.entries(base_opts)) {
+    this.constructor.__makeOpts()
+    for (const [key, default_value] of Object.entries(this.constructor.BASE_OPTS)) {
       this[key] = opts[key] === undefined ? default_value : opts[key]
     }
   }
@@ -28,9 +28,29 @@ class Model {
     this.META = this.constructor.META
   }
 
+  static __makeOpts() {
+    if (this.hasOwnProperty('BASE_OPTS')) {
+      return // only execute once!
+    }
+    this.BASE_OPTS = { ...this.opts }
+    let cls = this
+    while (cls !== Model) {
+      cls = Object.getPrototypeOf(cls)
+      if (cls.opts) {
+        Object.entries(cls.opts).forEach(([key,value]) => {
+          if (!this.BASE_OPTS.hasOwnProperty(key)) {
+            this.BASE_OPTS[key] = value
+          }
+        })
+      }
+    }
+  }
+
   static __makeMeta() {
     // this is for model level setup (eg primitives to fields or adding manager)
-    this.__makeMeta = () => {} // only execute once!
+    if (this.hasOwnProperty('META')) {
+      return // only execute once!
+    }
     this.META = {}
     let cls = this
     let manager = this.manager
