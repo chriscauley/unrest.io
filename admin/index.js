@@ -5,13 +5,14 @@ import './tags'
 const admin = {
   URL_PREFIX: 'admin',
 
-  reverse: function() {
-    const path = [uR.admin.URL_PREFIX, ...arguments].join('/')
+  reverse() {
+    const path = [this.URL_PREFIX, ...arguments].join('/')
     return `#!/${path}/`
   },
 
-  route: function() {
-    return uR.route(uR.admin.reverse(...arguments))
+  route() {
+    console.log('route')
+    return uR.route(this.reverse(...arguments))
   },
 
   start: () => uR.auth.ready(() => {

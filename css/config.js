@@ -56,7 +56,7 @@ const spectre = {
   btn: {
     group_block: 'btn-group btn-group-block',
   },
-  error: 'label label-error mb-2',
+  error: 'bg-gray text-error p-2 mb-2',
   success: 'label label-success mb-2',
   hide: 'd-hide',
   text: {

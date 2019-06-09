@@ -1,10 +1,9 @@
 import _ from 'lodash'
-import create from '../element/create'
 import config from './config'
 import Mixin from './Mixin'
 
 export default {
-  init: function(opts) {
+  init(opts) {
     this.mixin(Mixin)
     if (opts.ur_modal) {
       this.theme = this.css.modal
@@ -16,13 +15,10 @@ export default {
       if (opts.cancel) {
         this.on('unmount', opts.cancel)
       }
-      create('div', {
-        onclick: () => {
-          this.unmount()
-        },
-        className: this.theme.mask,
-        parent: this.root,
-      })
+      const mask = document.createElement('div')
+      mask.className = this.theme.mask
+      mask.addEventListener('click',() => this.unmount())
+      this.root.appendChild(mask)
     }
 
     this.theme.root &&
