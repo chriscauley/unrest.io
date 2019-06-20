@@ -59,9 +59,11 @@ export default {
           fieldnames = object.getFieldnames()
           submit = () => {
             Object.assign(object, this.getData())
-            return object.constructor.objects.create({
-              ...object.serialize(),
-            }).then(item => {
+            let promise = Promise.resolve(object)
+            if (object.constructor.objects) {
+              promise = object.constructor.objects.create(object.serialize())
+            }
+            return promise.then(item => {
               this.success_message = `${item} has been saved`
               opts.success && opts.success(item)
               riot.update()

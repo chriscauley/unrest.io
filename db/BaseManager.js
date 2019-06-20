@@ -1,4 +1,4 @@
-import db from '../db'
+import Model from './Model'
 
 export default class BaseManager {
   constructor(model) {
@@ -19,7 +19,7 @@ export default class BaseManager {
     Object.entries(data).forEach(([key,value]) => {
       // this is just for foreign key
       // maybe the Model constructor could serialize it first?
-      if (value instanceof db.Model) {
+      if (value instanceof Model) {
         data[key] = value.id
       }
     })
