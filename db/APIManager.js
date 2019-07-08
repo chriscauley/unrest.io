@@ -4,7 +4,7 @@ import BaseManager from './BaseManager'
 
 export default class APIManager extends BaseManager {
   create = data => {
-    this.normalize(data)
+    data = this.normalize(data)
 
     // #! TODO should be db.ready.block or db.ready.ajax
     db.ready.stop()

@@ -10,7 +10,7 @@ export default class BaseManager {
   }
 
   create = (data={}) => {
-    this.normalize(data)
+    data = this.normalize(data)
     const obj = new this.model(data)
     return this.set(obj)
   }
@@ -23,6 +23,9 @@ export default class BaseManager {
         data[key] = value.id
       }
     })
+    if (typeof data.serialize === 'function') {
+      data = data.serialize()
+    }
     return data
   }
 
