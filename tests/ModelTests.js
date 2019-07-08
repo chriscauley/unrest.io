@@ -20,7 +20,7 @@ export default () => {
     }
 
     const ott = new OneTwoThree()
-    OneTwoThree.objects.save(ott)
+    OneTwoThree.objects.set(ott)
 
     expect(ott.serialize()).to.deep.equal({ one: 1, two: 2, three: 3, id: 1 })
     const new_values = {

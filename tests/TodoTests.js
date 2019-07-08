@@ -52,7 +52,7 @@ export default () => {
         snap.match('incomplete', obj.serialize())
         obj.completed = true
         snap.match('complete', obj.serialize())
-        return Todo.objects.save(obj)
+        return Todo.objects.set(obj)
       })
       .then(obj => {
         Todo.objects.refresh()

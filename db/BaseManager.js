@@ -12,7 +12,7 @@ export default class BaseManager {
   create = (data={}) => {
     this.normalize(data)
     const obj = new this.model(data)
-    return this.save(obj)
+    return this.set(obj)
   }
 
   normalize(data) {
@@ -23,9 +23,15 @@ export default class BaseManager {
         data[key] = value.id
       }
     })
+    return data
   }
 
   save = obj => {
+    console.warn("Manager.save should be renamed to set")
+    return this.set(obj)
+  }
+
+  set = obj => {
     this._set(obj)
     return Promise.resolve(obj)
   }

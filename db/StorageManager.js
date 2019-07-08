@@ -26,7 +26,7 @@ export default class StorageManager extends BaseManager {
     this.storage.keys.forEach(key => {
       const obj = new this.model(this.storage.get(key))
       this.next_id = Math.max(this.next_id,obj.id + 1)
-      this.save(obj)
+      this.set(obj)
     })
     return Promise.resolve()
   }
