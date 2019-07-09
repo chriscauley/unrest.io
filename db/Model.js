@@ -101,6 +101,9 @@ class Model {
       if (!json.hasOwnProperty(name)) {
         value = field.initial
       }
+      if (typeof value === 'function') {
+        value = value()
+      }
       if (field.deserialize) {
         this[name] = field.deserialize(value, json, this)
       } else if (typeof field === 'function') {

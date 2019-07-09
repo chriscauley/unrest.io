@@ -22,6 +22,9 @@ class Input {
       // remove this and then look at an empty, requierd inupt.
       placeholder: ' ',
     })
+    if (typeof this.value === 'function') {
+      this.value = this.value()
+    }
     this.css = {
       label: css.form.label,
       field: `${css.form.field} ur-${opts.type} field__${this.name}`,

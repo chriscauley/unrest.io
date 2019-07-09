@@ -59,8 +59,9 @@ const ForeignKey = (fk_model, opts = {}) => {
 }
 
 const DateTime = (opts = {}) => {
-  const initial = (opts.auto_now_add || opts.auto_now)?new Date().valueOf():undefined
-  const field = Field(initial,opts)
+  const now = () => new Date().valueOf()
+  const initial = (opts.auto_now_add || opts.auto_now)?now:undefined
+  const field = Field(initial, opts)
   return Object.assign(field, {
     type: 'datetime',
     serialize: value => {
@@ -68,7 +69,7 @@ const DateTime = (opts = {}) => {
         return new Date(value).valueOf()
       }
       return (value && value.valueOf)?value.valueOf():value
-    },
+    }
   })
 }
 
