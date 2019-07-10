@@ -17,6 +17,9 @@ const getCls = opts => {
   if (config.type2class[opts.type]) {
     return config.type2class[opts.type]
   }
+  if (config.name2class[opts.name]) {
+    return config.name2class[opts.name]
+  }
   if (opts.choices) {
     if (opts.type === 'list') {
       return Checkbox

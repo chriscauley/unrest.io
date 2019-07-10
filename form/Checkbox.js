@@ -10,7 +10,6 @@ export default class Checkboxes extends Input {
     super(opts)
     this.choices = prepChoices(this)
     this.input_type = 'checkbox'
-    window.C = this
   }
 
   createInput() {
