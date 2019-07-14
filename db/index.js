@@ -53,6 +53,12 @@ const db = {
   apps: [],
   REQUIRED: {},
   ...fields,
+  getModel: model => {
+    if (typeof model === 'string') {
+      model = db[model]
+    }
+    return model
+  }
 }
 
 export default db

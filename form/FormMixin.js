@@ -54,7 +54,7 @@ export default {
     _.assign(this, {
       title: this.opts.title,
       addInputs: (opts = this.opts) => {
-        const { object, model, editable_fieldnames } = opts
+        const { object, editable_fieldnames } = opts
         let _fields, fieldnames, submit
         if (object) {
           opts.initial = object.serialize()
@@ -72,7 +72,8 @@ export default {
               riot.update()
             })
           }
-        } else if (model) {
+        } else if (opts.model) {
+          const model = db.getModel(opts.model)
           model.__makeMeta()
           _fields = model.META.fields
           fieldnames = editable_fieldnames || model.editable_fieldnames
