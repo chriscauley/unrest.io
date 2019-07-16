@@ -13,7 +13,7 @@ export default {
 
     if (opts.ur_modal) {
       if (opts.cancel) {
-        this.on('unmount', opts.cancel)
+        this.one('unmount', opts.cancel)
       }
       const mask = document.createElement('div')
       mask.className = this.theme.mask

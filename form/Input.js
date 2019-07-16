@@ -84,18 +84,19 @@ class Input {
 
   bindEvents(input) {
     const EVENTS = ['change', 'focus', 'keyup', 'keydown']
+    const form_tag = this.tag.parent
+    const bounceSubmit = _.debounce(form_tag.submit, 2000)
 
     EVENTS.forEach(name => {
       input.addEventListener(name, _event => {
         const new_value = this._get_value()
         if (this.value !== new_value) {
-          const form_tag = this.tag.parent
           this.value = new_value
           this._checkValidity()
           this._updateCss()
           form_tag.update()
-          if (name === 'change' && form_tag.opts.autosubmit) {
-            form_tag.submit()
+          if (form_tag.opts.autosubmit) {
+            bounceSubmit()
           }
         }
       })
