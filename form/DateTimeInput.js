@@ -14,20 +14,18 @@ class DateTimeInput extends Input {
       date_value = format(dt, 'YYYY-MM-DD')
       time_value = format(dt, 'HH:mm')
     }
-    const attrs = {
-      className: this.css.input,
-      parent: this.tag.root,
-    }
     setTimeout(() => (this._date_input.value = date_value), 2000)
     this._date_input = create('input', {
       type: 'date',
       value: date_value,
-      ...attrs,
+      className: this.css.input,
+      parent: this.tag.root,
     })
     this._time_input = create('input', {
       type: 'time',
       value: time_value,
-      ...attrs,
+      className: this.css.input,
+      parent: this.tag.root,
     })
   }
 
