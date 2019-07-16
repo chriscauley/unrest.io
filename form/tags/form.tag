@@ -28,10 +28,12 @@ import ThemeMixin from '../../css/ThemeMixin'
 
         <div class="button_div">
           <yield from="button_div"/>
-          <button class={ css.btn.success } onclick={ submit } disabled={!valid}>
-            { opts.success_text }</button>
-          <button class={ css.btn.cancel } if={ opts.cancel } onclick={ cancel }>
-            { opts.cancel_text }</button>
+          <virtual if={!opts.autosubmit}>
+            <button class={ css.btn.success } onclick={ submit } disabled={!valid}>
+              { opts.success_text }</button>
+            <button class={ css.btn.cancel } if={ opts.cancel } onclick={ cancel }>
+              { opts.cancel_text }</button>
+          </virtual>
         </div>
 
       </form>
@@ -67,7 +69,7 @@ submit(e) {
 
 cancel(e) {
   e && e.preventDefault && e.preventDefault()
-  this.opts.cancel(this,e)
+  this.opts.cancel.bind(this)(e)
 }
 </script>
 </ur-form>
