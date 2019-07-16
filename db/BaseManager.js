@@ -16,6 +16,9 @@ export default class BaseManager {
   }
 
   normalize(data) {
+    if (typeof data.serialize === 'function') {
+      data = data.serialize()
+    }
     Object.entries(data).forEach(([key,value]) => {
       // this is just for foreign key
       // maybe the Model constructor could serialize it first?
@@ -23,9 +26,6 @@ export default class BaseManager {
         data[key] = value.id
       }
     })
-    if (typeof data.serialize === 'function') {
-      data = data.serialize()
-    }
     return data
   }
 
