@@ -59,7 +59,7 @@ export default {
         if (object) {
           opts.initial = object.serialize()
           _fields = object.META.fields
-          fieldnames = object.getFieldnames()
+          fieldnames = editable_fieldnames || object.getFieldnames()
           submit = () => {
             Object.assign(object, this.getData())
             let promise = Promise.resolve(object)
