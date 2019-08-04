@@ -18,7 +18,14 @@ router.ready(() => {
   // if router has not been activated, trigger for current location
   !router._stale && router.route(window.location.href)
   window.addEventListener('hashchange', () => {
-    route(window.location.hash)
+    let path = window.location.pathname
+    if (window.location.hash) {
+      path += "#"+window.location.hash
+    }
+    // #! TODO this is needed so you can manuall change the hash
+    // but I can't get it to not break the general router behavior
+    // such as #/abc/ => /arst/ ends up going to /
+    //route(path)
   })
 })
 
