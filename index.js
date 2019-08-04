@@ -38,8 +38,8 @@ Object.assign(uR, {
   storage,
   db,
   admin,
-  Date: window.Date,
-  TrueDate: window.Date,
+  Date: Date,
+  TrueDate: Date,
 })
 
 if (typeof window !== undefined) {

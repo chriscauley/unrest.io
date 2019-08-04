@@ -2,6 +2,7 @@ import Model from './Model'
 
 export default class BaseManager {
   constructor(model) {
+    this._next_id = 0
     this.model = model
     model.manager = model.manager || this.constructor
     model.objects = this
@@ -44,7 +45,11 @@ export default class BaseManager {
       obj = new this.model(obj)
     }
     if (!obj.id) {
-      throw "Object cannot be set without id"
+      if (uR.FAKE_IDS) {
+        obj.id = ++ this._next_id
+      } else {
+        throw "Object cannot be set without id"
+      }
     }
     this.items.set(obj.id, obj)
     return obj
