@@ -7,7 +7,13 @@ import uR from '../../index'
       <div class={ theme.header_title }>Admin Home</div>
     </div>
     <div class={ theme.content }>
-      <ur-table></ur-table>
+      <div class="mb-2">
+        <ur-table></ur-table>
+      </div>
+      <div if={links} class="mb-2">
+        <h4>Debug Links</h4>
+        <ur-table thead={links.head} tbody={links.body}></ur-table>
+      </div>
     </div>
   </div>
 
@@ -25,6 +31,14 @@ this.on("mount",function() {
       ])
     )
   })
+  const { DEBUG_URLS } = uR.admin
+  if (DEBUG_URLS.length) {
+    this.links = {
+      head: [],
+      body: DEBUG_URLS.map(href => `<a href="${href}">${href}</a>`)
+    }
+  }
+  this.update()
 });
 </script>
 </ur-admin-home>

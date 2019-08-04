@@ -3,6 +3,7 @@ import uR from '../index'
 import './tags'
 
 const admin = {
+  DEBUG_URLS: [],
   URL_PREFIX: 'admin',
 
   reverse() {
