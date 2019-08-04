@@ -23,6 +23,10 @@ class Model {
     }
   }
 
+  getFields() {
+    return this.META.fields
+  }
+
   makeMeta() {
     this.constructor.__makeMeta()
     this.META = this.constructor.META

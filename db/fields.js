@@ -74,7 +74,7 @@ const DateTime = (opts = {}) => {
 }
 
 const Time = (initial, opts = {}) => {
-  const field = Field(initial,opts)
+  const field = Field(initial, opts)
   field.type = 'time'
   return field
 }
