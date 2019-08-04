@@ -9,6 +9,8 @@ const auth = {
     reset: '/user.json',
     register_ajax: '/api/auth/register/',
     login_ajax: '/api/auth/login/',
+    logout_ajax: '/api/auth/logout/',
+    logout: '#!/auth/logout/',
   },
   GREETING: 'Please Login to Continue',
 }
@@ -27,6 +29,12 @@ auth.ready(() => {
     [auth.urls.start + '$']: router.routeElement('ur-auth-start'),
     [auth.urls.login]: router.routeElement('ur-auth-login'),
     [auth.urls.register]: register,
+    [auth.urls.logout]: () => {
+      ajax({url: auth.urls.logout_ajax, method: 'POST'}).then(() => {
+        uR.router.route("#")
+        window.location.reload()
+      })
+    }
   })
 })
 

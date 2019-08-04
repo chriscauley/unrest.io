@@ -19,10 +19,12 @@ export default () => {
   }
   auth.setUser() // removes current user
   return ajax({
-    url: auth.urls.reset, // #! TODO should be configurable
+    url: auth.urls.reset,
   }).then(data => {
     auth.setUser(data.user)
     auth.ready.start()
+
+    // #! TODO use riot observable so uR.auth.one vs uR.auth.on can control removing event
     if (auth.user && auth.AUTH_SUCCESS) {
       auth.AUTH_SUCCESS()
       auth.AUTH_SUCCESS = undefined
