@@ -1,9 +1,3 @@
-import Ready from '../ready'
-import APIManager from "./APIManager"
-import BaseManager from "./BaseManager"
-import StorageManager from "./StorageManager"
-import Model from "./Model"
-import * as fields from "./fields"
 import unslugify, { camel2SpaceCase } from '../schema/unslugify'
 
 const _nameAppAndModel = model => {
@@ -17,15 +11,15 @@ const _nameAppAndModel = model => {
 }
 
 const _getOrCreateApp = app_label => {
-  if (!db[app_label]) {
-    db[app_label] = {
+  if (!register.db[app_label]) {
+    register.db[app_label] = {
       verbose_name: unslugify(app_label || "main"),
       name: app_label,
       _models: [],
     }
-    db.apps.push(db[app_label])
+    register.db.apps.push(register.db[app_label])
   }
-  return db[app_label]
+  return register.db[app_label]
 }
 
 const register = model => {
@@ -34,31 +28,12 @@ const register = model => {
   const { app_label, model_name, slug } = model
   const app = _getOrCreateApp(app_label)
 
-  // assign model to app and uR.db
-  db[slug] = app[model_name] = model
+  // assign model to app and uR.register.db
+  register.db[slug] = app[model_name] = model
   app._models.push(model)
 
   // human readable string e.g. "BlogPost" => "Blog Post"
   model.verbose_name = model.verbose_name || camel2SpaceCase(model_name)
 }
 
-const db = {
-  ready: Ready(),
-  register,
-  APIManager,
-  BaseManager,
-  StorageManager,
-  Model,
-  fields,
-  apps: [],
-  REQUIRED: {},
-  ...fields,
-  getModel: model => {
-    if (typeof model === 'string') {
-      model = db[model]
-    }
-    return model
-  }
-}
-
-export default db
+export default register

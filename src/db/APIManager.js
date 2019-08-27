@@ -1,13 +1,13 @@
 import ajax from '../ajax'
-import db from './index'
+import ready from './ready'
 import BaseManager from './BaseManager'
 
 export default class APIManager extends BaseManager {
   create = data => {
     data = this.normalize(data)
 
-    // #! TODO should be db.ready.block or db.ready.ajax
-    db.ready.stop()
+    // #! TODO should be ready.block or ready.ajax
+    ready.stop()
     return ajax({
       url: this._get_base_url(),
       method: 'POST',
@@ -15,21 +15,21 @@ export default class APIManager extends BaseManager {
     })
       .then(data => {
         const obj = this._set(data)
-        db.ready.start() //#! TODO
+        ready.start() //#! TODO
         return obj
       })
   }
 
   refresh() {
-    // #! TODO should be db.ready.block or db.ready.ajax
-    db.ready.stop()
+    // #! TODO should be ready.block or ready.ajax
+    ready.stop()
     return ajax(this._get_base_url())
       .then(response => {
         this.pagination = response.pagination
         this.items = new Map()
         response.results.forEach(this._set)
       })
-      .then(db.ready.start) //#! TODO
+      .then(ready.start) //#! TODO
   }
 
   _get_base_url() {

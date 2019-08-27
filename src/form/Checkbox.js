@@ -1,5 +1,3 @@
-import { pick } from 'lodash'
-
 import prepChoices from '../schema/prepChoices'
 import create from '../element/create'
 import Input from './Input'
@@ -13,7 +11,7 @@ export default class Checkboxes extends Input {
   }
 
   createInput() {
-    return 
+    return
   }
   bindEvents() {
     this.tag.on("mount",() => {

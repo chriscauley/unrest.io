@@ -2,14 +2,14 @@
   "name": "unrest.io",
   "version": "0.0.5",
   "description": "A schema driven web framework built on riot.js",
-  "main": "index.js",
+  "main": "dist/unrest.min.js",
   "source": true,
   "directories": {
     "test": "tests"
   },
   "scripts": {
-    "watch": "parcel watch index.js less/base.less",
-    "build": "parcel build index.js less/base.less",
+    "build": "rollup -c && UR_MIN=1 rollup -c",
+    "watch": "UR_MIN=1 rollup -c --watch",
     "test": "./bin/test"
   },
   "repository": {
@@ -19,17 +19,17 @@
   "author": "chriscauley",
   "license": "MIT",
   "dependencies": {
-    "@babel/core": "^7.0.0-0",
-    "@babel/plugin-proposal-class-properties": "^7.3.0",
-    "@babel/plugin-transform-runtime": "^7.5.0",
-    "cookie": "^0.3.1",
-    "date-fns": "^1.30.1",
+    "cookie": "^0.4.0",
+    "date-fns": "^2.0.1",
     "diff": "^4.0.1",
     "lodash": "^4.17.14",
+    "object-hash": "^1.3.1",
     "riot": "^3.x"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.4.2",
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
     "babel-eslint": "^10.0.1",
     "chai": "^4.2.0",
     "eslint": "^5.12.0",
@@ -39,19 +39,17 @@
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-riot": "^0.1.8",
     "less": "^3.9.0",
-    "object-hash": "^1.3.1",
-    "parcel": "^1.11.0",
-    "parcel-plugin-riot": "^2.1.0",
-    "prettier": "^1.15.3"
-  },
-  "peerDependencies": {
-    "object-hash": "^1.3.1",
-    "riot": "^3.x"
+    "prettier": "^1.15.3",
+    "rollup": "^1.20.2",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-babel-minify": "^9.0.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-riot": "2.1",
+    "rollup-plugin-sourcemaps": "^0.4.2"
   },
   "babel": {
     "plugins": [
-      "@babel/plugin-proposal-class-properties",
-      "@babel/plugin-transform-runtime"
+      "@babel/plugin-proposal-class-properties"
     ],
     "presets": [
       [

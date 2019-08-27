@@ -1,4 +1,4 @@
-import uR from '../../index'
+import db from '../../db'
 
 <ur-admin-home>
   <div class={ theme.outer }>
@@ -22,7 +22,7 @@ this.mixin(uR.css.ThemeMixin)
 this.on("mount",function() {
   this.thead = ["Model","Count"]
   this.tbody = []
-  uR.db.apps.map(app => {
+  db.apps.map(app => {
     const url_root = `#!/admin/${app.name}/`
     app._models.filter(model => model.objects).map(
       model => this.tbody.push([
@@ -31,7 +31,9 @@ this.on("mount",function() {
       ])
     )
   })
-  const { DEBUG_URLS } = uR.admin
+  //const { DEBUG_URLS } = uR.admin
+console.warn("need to import DEBUG_URLS somehow")
+let DEBUG_URLS
   if (DEBUG_URLS.length) {
     this.links = {
       head: [],

@@ -1,22 +1,12 @@
-import Ready from '../ready'
+import auth from './config'
 
-const auth = {
-  ready: Ready(),
-  urls: {
-    start: '#!/auth/',
-    register: '#!/auth/register/',
-    login: '#!/auth/login/',
-    reset: '/user.json',
-    register_ajax: '/api/auth/register/',
-    login_ajax: '/api/auth/login/',
-    logout_ajax: '/api/auth/logout/',
-    logout: '#!/auth/logout/',
-  },
-  GREETING: 'Please Login to Continue',
-}
 //#! TODO should routes.add and the urls be in a separate file?
 import router from '../router'
 import ajax from '../ajax'
+import './ur-auth.tag'
+import loginRequired from './loginRequired'
+import setUser from './setUser'
+import reset from './reset'
 
 auth.ready(() => {
   let register = router.routeElement('ur-auth-register')
@@ -38,13 +28,6 @@ auth.ready(() => {
   })
 })
 
-export default auth
-
-import './ur-auth.tag'
-import loginRequired from './loginRequired'
-import setUser from './setUser'
-import reset from './reset'
-
 Object.assign(auth, {
   loginRequired,
   setUser,
@@ -52,3 +35,5 @@ Object.assign(auth, {
   enabled: true,
   FAST_REGISTER: true,
 })
+
+export default auth

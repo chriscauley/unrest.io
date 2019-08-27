@@ -1,12 +1,13 @@
-import uR from '../../index'
+import element from '../../element'
 
 <ur-table>
-  <table class={ uR.css.table }>
+  <table class={ css.table }>
     <thead></thead>
     <tbody></tbody>
     <tfoot></tfoot>
   </table>
 
+  this.Mixin("CSSMixin")
   this.on("mount",function() {
     var self = this;
     ["thead","tbody","tfoot"].map(function(section) {
@@ -19,7 +20,7 @@ import uR from '../../index'
         row.map(function(column) {
           if (typeof column == "string" || typeof column == 'number') { column = { innerHTML: column +"" } }
           column.parent = tr;
-          uR.element.create("td",column);
+          element.create("td",column);
         })
         t_element.appendChild(tr);
       });

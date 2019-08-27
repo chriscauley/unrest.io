@@ -1,7 +1,7 @@
 import create from '../element/create'
 import router from '../router'
 
-import auth from './index'
+import auth from './config'
 
 export default (func, data = {}) => {
   // first argument can be a string to imply we should route directly to a tag

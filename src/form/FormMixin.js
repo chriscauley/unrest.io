@@ -44,7 +44,6 @@ export default {
   init: function() {
     this.prepOpts()
     this.inputs = []
-    window.uR._latest_form = this
     _.defaults(this.opts, {
       success_text: 'Submit',
       cancel_text: 'Cancel',

@@ -1,6 +1,9 @@
 import cookie from 'cookie'
-import querystring from 'querystring'
 import _ from 'lodash'
+
+var queryStringify = params => Object.keys(params).map(
+  (key) => encodeURIComponent(key) + '=' + encodeURIComponent(params[key])
+).join('&')
 
 const ajax = opts => {
   if (typeof opts === 'string') {
@@ -15,7 +18,7 @@ const ajax = opts => {
     if (url.endswith('?')) {
       url += '?'
     }
-    url += querystring.stringify(opts.data)
+    url += queryStringify(opts.data)
   } else {
     if (opts.data) {
       fetch_opts.body = JSON.stringify(opts.data)

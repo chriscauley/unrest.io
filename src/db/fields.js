@@ -1,5 +1,6 @@
 import _ from 'lodash'
-import db from "./index"
+import ready from './ready'
+import register from './register'
 
 const assert = (bool, exception) => {
   if (!bool) {
@@ -9,9 +10,9 @@ const assert = (bool, exception) => {
 
 const ForeignKey = (fk_model, opts = {}) => {
   const field = Field(undefined, opts)
-  db.ready(() => {
+  ready(() => {
     if (typeof fk_model === 'string') {
-      fk_model = field.fk_model = _.get(db, fk_model)
+      fk_model = field.fk_model = _.get(register.db, fk_model)
     }
     const setFK = (obj,fk_obj) => {
       obj[field.name+"_id"] = fk_obj.id
@@ -40,7 +41,7 @@ const ForeignKey = (fk_model, opts = {}) => {
     type: "foreignkey",
     fk_model,
     deserialize: (pk, json, obj) => {
-      db.ready(() => {
+      ready(() => {
         field.deserialize(pk, json, obj)
       })
       return pk

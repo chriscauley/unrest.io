@@ -1,4 +1,4 @@
-import uR from '../../index'
+import db from '../../db'
 
 <ur-admin-app>
   <div class={ theme.outer }>
@@ -10,12 +10,12 @@ import uR from '../../index'
       <ur-table></ur-table>
     </div>
   </div>
-  
+
 <script>
-this.mixin(uR.css.ThemeMixin)
+this.mixin('ThemeMixin')
 this.on("before-mount",function() {
   const app_label = this.opts.matches[1]
-  this.app = uR.db[app_label]
+  this.app = db[app_label]
   this.thead = ["Model","Count"]
   this.tbody = this.app._models.map(function(model) {
     return [

@@ -1,6 +1,5 @@
 import _ from 'lodash'
-import db from "./index"
-
+import register from './register'
 import { TYPES } from "./fields"
 
 const notNil = _.negate(_.isNil)
@@ -58,7 +57,7 @@ class Model {
     this.META = {}
     let cls = this
     let manager = this.manager
-    db.register(this)
+    register(this)
     const fieldsets = [cls.fields]
     while (cls !== Model) {
       cls = Object.getPrototypeOf(cls)

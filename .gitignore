@@ -1,7 +1,6 @@
 # node stuff
 yarn-error.log
 .cache/
-dist
 node_modules
 
 # python stuff

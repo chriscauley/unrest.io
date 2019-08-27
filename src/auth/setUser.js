@@ -1,4 +1,4 @@
-import auth from './index'
+import auth from './config'
 import riot from 'riot'
 
 export default user => {

@@ -1,6 +1,5 @@
 
 import Storage from '../storage/Storage'
-import db from './index'
 import BaseManager from './BaseManager'
 import { Int } from './fields'
 

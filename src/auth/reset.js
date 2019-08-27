@@ -1,4 +1,4 @@
-import auth from './index'
+import auth from './config'
 import ajax from '../ajax'
 
 export default () => {

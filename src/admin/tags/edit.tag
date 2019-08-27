@@ -1,4 +1,5 @@
-import uR from '../../index'
+import router from '../../router'
+import db from '../../db'
 
 <ur-admin-edit>
   <div class={ theme.outer }>
@@ -10,16 +11,16 @@ import uR from '../../index'
   </div>
 
 <script>
-this.mixin(uR.css.ThemeMixin)
+this.mixin('ThemeMixin')
 success(new_obj) {
   if (this.obj === "new") {
     const { app_label, model_name } = this.model
-    uR.router.route(`#!/admin/${app_label}/${model_name}/${new_obj.id}/`)
+    router.route(`#!/admin/${app_label}/${model_name}/${new_obj.id}/`)
   }
 }
 this.on("before-mount",function() {
   const [_path,app_label,model_name,object_id] = this.opts.matches
-  this.app = uR.db[app_label];
+  this.app = db[app_label];
   this.model = this.app[model_name];
   this.obj = this.object = this.model.objects.get(object_id)
   this.title = `Editing: ${this.object}`

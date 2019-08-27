@@ -1,5 +1,4 @@
-import ThemeMixin from '../css/ThemeMixin'
-import auth from './index'
+import auth from './config'
 import ajax from '../ajax'
 
 <ur-auth-start>
@@ -18,7 +17,7 @@ import ajax from '../ajax'
   </div>
 <script>
   this.auth = auth
-  this.mixin(ThemeMixin)
+  this.mixin('ThemeMixin')
 </script>
 </ur-auth-start>
 
@@ -35,7 +34,7 @@ import ajax from '../ajax'
       this.unmount()
     }
   })
-  this.mixin(ThemeMixin)
+  this.mixin('ThemeMixin')
   this.schema = {
     username: {},
     password: { type: 'password' },

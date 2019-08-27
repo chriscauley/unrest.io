@@ -1,4 +1,6 @@
-import uR from '../index'
+import router from '../router/router'
+import css from '../css/'
+import auth from '../auth'
 
 import './tags'
 
@@ -11,19 +13,13 @@ const admin = {
     return `#!/${path}/`
   },
 
-  route() {
-    console.log('route')
-    return uR.route(this.reverse(...arguments))
-  },
-
-  start: () => uR.auth.ready(() => {
-    if (!uR.auth.user || !uR.auth.user.is_superuser) {
+  start: () => auth.ready(() => {
+    if (!auth.user || !auth.user.is_superuser) {
       return
     }
-    const { routeElement } = uR.router
-    const route = name => routeElement('ur-admin-'+name)
+    const route = name => router.routeElement('ur-admin-'+name)
 
-    uR.router.add({
+    router.add({
       '#!/admin/$': route('home'),
       '#!/admin/([^/]+)/$': route('app'),
       '#!/admin/([^/]+)/([^/]+)/$': route('list'),
@@ -31,7 +27,7 @@ const admin = {
     })
 
     uR.element.create('a', {
-      className: uR.css.icon('edit'),
+      className: css.icon('edit'),
       href: '#!/admin/',
       parent: document.body,
       id: 'admin-link',
